@@ -1,0 +1,155 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Assets/run3.png" type="Texture" id=1]
+[ext_resource path="res://Assets/run2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/run1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/run4.png" type="Texture" id=4]
+[ext_resource path="res://Player.gd" type="Script" id=5]
+[ext_resource path="res://HealthBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Fonts/gugi.tres" type="DynamicFontData" id=7]
+[ext_resource path="res://State.gd" type="Script" id=8]
+[ext_resource path="res://Assets/powerup2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/damage3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/powerup1.png" type="Texture" id=11]
+[ext_resource path="res://Assets/damage2.png" type="Texture" id=12]
+[ext_resource path="res://Assets/question.png" type="Texture" id=13]
+[ext_resource path="res://Assets/question2.png" type="Texture" id=14]
+[ext_resource path="res://Assets/question3.png" type="Texture" id=15]
+[ext_resource path="res://Assets/purple_question2.png" type="Texture" id=16]
+[ext_resource path="res://Assets/purple_question.png" type="Texture" id=17]
+[ext_resource path="res://Assets/purple_question3.png" type="Texture" id=18]
+[ext_resource path="res://Assets/green_question2.png" type="Texture" id=19]
+[ext_resource path="res://Assets/green_question.png" type="Texture" id=20]
+[ext_resource path="res://Assets/green_question3.png" type="Texture" id=21]
+[ext_resource path="res://CanvasLayer.gd" type="Script" id=22]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "damage",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "powerup",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24.8343, 27.1866 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 20 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "powerup"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.614708, 4.61032 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 768
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 22 )
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 6 )]
+margin_left = 40.4198
+margin_top = 20.6434
+margin_right = 138.419
+margin_bottom = 31.6434
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_left = 152.343
+margin_top = 16.0441
+margin_right = 192.343
+margin_bottom = 37.0441
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.145098, 0.835294, 0.0666667, 1 )
+text = "10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrangeQuestion" type="AnimatedSprite" parent="CanvasLayer"]
+position = Vector2( 280, 27.3017 )
+frames = SubResource( 4 )
+animation = "idle"
+
+[node name="PurpleQuestion" type="AnimatedSprite" parent="CanvasLayer"]
+position = Vector2( 225, 27.302 )
+frames = SubResource( 5 )
+animation = "idle"
+frame = 3
+
+[node name="GreenQuestion" type="AnimatedSprite" parent="CanvasLayer"]
+position = Vector2( 335, 27.302 )
+frames = SubResource( 6 )
+animation = "idle"
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 36.3765, 12.1255 )
+
+[node name="UpPosition2D" type="Position2D" parent="."]
+position = Vector2( -0.418121, -38.049 )
+
+[node name="DownPosition2D" type="Position2D" parent="."]
+position = Vector2( 0, 38.8852 )
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="State" type="Node2D" parent="."]
+script = ExtResource( 8 )
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

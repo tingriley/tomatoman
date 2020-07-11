@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://CandytTile.tres" type="TileSet" id=1]
+[ext_resource path="res://Decoration/candy4.png" type="Texture" id=2]
+[ext_resource path="res://Decoration/candy2.png" type="Texture" id=3]
+[ext_resource path="res://Decoration/candy3.png" type="Texture" id=4]
+[ext_resource path="res://Decoration/candy1.png" type="Texture" id=5]
+[ext_resource path="res://Stage5.gd" type="Script" id=6]
+[ext_resource path="res://Background/bg_pink.png" type="Texture" id=7]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=8]
+
+[node name="Stage5" type="Node2D"]
+script = ExtResource( 6 )
+left_stage = "res://Stage3.tscn"
+
+[node name="candy1" type="Sprite" parent="."]
+position = Vector2( 850, 594.053 )
+scale = Vector2( 0.7, 0.7 )
+z_index = -1
+texture = ExtResource( 5 )
+offset = Vector2( 0, 40 )
+flip_h = true
+
+[node name="candy6" type="Sprite" parent="."]
+position = Vector2( 418.155, 639.303 )
+scale = Vector2( 0.856803, 0.773504 )
+z_index = -2
+texture = ExtResource( 3 )
+flip_h = true
+
+[node name="candy5" type="Sprite" parent="."]
+position = Vector2( 243, 619.429 )
+scale = Vector2( 0.7, 0.7 )
+z_index = -1
+texture = ExtResource( 4 )
+
+[node name="candy7" type="Sprite" parent="."]
+position = Vector2( 900, 619.429 )
+scale = Vector2( 0.4, 0.4 )
+z_index = -1
+texture = ExtResource( 4 )
+
+[node name="candy4" type="Sprite" parent="."]
+position = Vector2( 298, 619.429 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -1
+texture = ExtResource( 2 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+collision_mask = 7
+format = 1
+tile_data = PoolIntArray( 17, 6, 0, 65542, 6, 0, 65553, 6, 0, 131078, 6, 0, 131089, 6, 0, 196612, 6, 0, 196613, 6, 0, 196614, 6, 0, 196615, 6, 0, 196616, 6, 0, 196619, 6, 0, 196620, 6, 0, 196625, 6, 0, 262150, 6, 0, 262158, 6, 0, 262159, 6, 0, 262161, 6, 0, 327686, 6, 0, 327697, 6, 0, 393218, 6, 0, 393233, 6, 0, 458753, 6, 0, 458754, 6, 0, 458755, 6, 0, 458761, 6, 0, 458762, 6, 0, 458763, 6, 0, 458764, 6, 0, 458765, 6, 0, 458769, 6, 0, 524290, 6, 0, 524305, 6, 0, 589841, 6, 0, 655360, 2, 0, 655361, 2, 0, 655362, 2, 0, 655363, 2, 0, 655364, 2, 0, 655365, 2, 0, 655366, 2, 0, 655367, 2, 0, 655368, 2, 0, 655369, 2, 0, 655370, 2, 0, 655371, 2, 0, 655372, 2, 0, 655373, 2, 0, 655374, 2, 0, 655377, 6, 0, 720896, 6, 0, 720897, 6, 0, 720898, 6, 0, 720899, 6, 0, 720900, 6, 0, 720901, 6, 0, 720902, 6, 0, 720903, 6, 0, 720904, 6, 0, 720905, 6, 0, 720906, 6, 0, 720907, 6, 0, 720908, 6, 0, 720909, 6, 0, 720910, 6, 0, 720912, 2, 0, 720913, 6, 0, 786449, 6, 0, 851985, 6, 0, 917521, 6, 0, 983055, 5, 0, 983056, 2, 0, 983057, 6, 0, 1048593, 6, 0, 1114121, 13, 0, 1114122, 16, 0, 1114123, 16, 0, 1114124, 17, 0, 1114129, 6, 0, 1179665, 6, 0, 1245189, 13, 0, 1245190, 16, 0, 1245191, 17, 0, 1245201, 6, 0, 1310737, 6, 0, 1376273, 6, 0, 1441804, 5, 0, 1441805, 2, 0, 1441806, 7, 0, 1441809, 6, 0, 1507345, 6, 0, 1572864, 6, 0, 1572865, 6, 0, 1572866, 6, 0, 1572867, 6, 0, 1572868, 6, 0, 1572869, 6, 0, 1572881, 6, 0, 1638400, 6, 0, 1638401, 6, 0, 1638417, 6, 0, 1703936, 6, 0, 1703937, 6, 0, 1703946, 6, 0, 1703947, 6, 0, 1703948, 6, 0, 1703953, 6, 0, 1769472, 6, 0, 1769473, 6, 0, 1769475, 6, 0, 1769476, 6, 0, 1769477, 6, 0, 1769483, 6, 0, 1769489, 6, 0, 1835008, 6, 0, 1835009, 6, 0, 1835013, 6, 0, 1835019, 6, 0, 1835020, 6, 0, 1835024, 6, 0, 1835025, 6, 0, 1900544, 6, 0, 1900545, 6, 0, 1900549, 6, 0, 1900550, 6, 0, 1900551, 6, 0, 1900555, 6, 0, 1900556, 6, 0, 1900560, 6, 0, 1900561, 6, 0, 1966080, 6, 0, 1966081, 6, 0, 1966082, 6, 0, 1966083, 6, 0, 1966084, 6, 0, 1966085, 6, 0, 1966086, 6, 0, 1966087, 6, 0, 1966092, 6, 0, 1966093, 6, 0, 1966094, 6, 0, 1966095, 6, 0, 1966096, 6, 0, 1966097, 6, 0, 2031619, 6, 0, 2031620, 6, 0, 2031621, 6, 0, 2031633, 6, 0, 2097169, 6, 0, 2162705, 6, 0, 2228228, 5, 0, 2228229, 2, 0, 2228230, 2, 0, 2228231, 2, 0, 2228232, 7, 0, 2228241, 6, 0, 2293777, 6, 0, 2359313, 6, 0, 2424843, 13, 0, 2424844, 16, 0, 2424845, 17, 0, 2621440, 6, 0, 2621441, 6, 0, 2621442, 6, 0, 2621443, 6, 0, 2621444, 6, 0, 2621445, 6, 0, 2621446, 6, 0, 2621447, 6, 0, 2621448, 6, 0, 2621449, 6, 0, 2621450, 6, 0, 2621451, 6, 0, 2621452, 6, 0, 2621453, 6, 0, 2621454, 6, 0, 2621455, 6, 0, 2621456, 6, 0, 2621457, 6, 0 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_mirroring = Vector2( 1152, 768 )
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+modulate = Color( 0.0980392, 0.0666667, 0.0392157, 1 )
+z_index = 100
+texture = ExtResource( 7 )
+centered = false
+
+[node name="Player" parent="." instance=ExtResource( 8 )]
+position = Vector2( 32, 607.303 )
+z_index = 2

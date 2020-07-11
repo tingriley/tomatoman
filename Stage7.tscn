@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://CandytTile.tres" type="TileSet" id=1]
+[ext_resource path="res://Background/bg_pink.png" type="Texture" id=7]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=8]
+
+[node name="Stage7" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+collision_mask = 7
+format = 1
+tile_data = PoolIntArray( -655355, 6, 0, -655354, 6, 0, -655353, 6, 0, -655352, 6, 0, -655351, 6, 0, -655350, 6, 0, -655349, 6, 0, -655348, 6, 0, -655347, 6, 0, -655346, 6, 0, -655345, 6, 0, -655344, 6, 0, -524289, 6, 0, -589824, 6, 0, -589823, 6, 0, -589822, 6, 0, -589821, 6, 0, -589820, 6, 0, -589819, 6, 0, -589818, 6, 0, -589817, 6, 0, -589816, 6, 0, -589815, 6, 0, -589814, 6, 0, -589808, 6, 0, -458753, 6, 0, -524288, 6, 0, -524272, 6, 0, -458752, 6, 0, -458735, 6, 0, -393216, 6, 0, -393215, 6, 0, -393199, 6, 0, -327680, 6, 0, -327679, 6, 0, -327663, 6, 0, -262144, 6, 0, -262143, 6, 0, -262127, 6, 0, -196608, 6, 0, -196607, 6, 0, -196591, 6, 0, -131072, 6, 0, -131071, 6, 0, -131055, 6, 0, -65519, 6, 0, 0, 6, 0, 1, 6, 0, 2, 6, 0, 10, 6, 0, 11, 6, 0, 12, 6, 0, 13, 6, 0, 14, 6, 0, 15, 6, 0, 16, 6, 0, 17, 6, 0, 65536, 6, 0, 65537, 6, 0, 65538, 6, 0, 65545, 6, 0, 65546, 6, 0, 65547, 6, 0, 65548, 6, 0, 65549, 6, 0, 65550, 6, 0, 65551, 6, 0, 65552, 6, 0, 65553, 6, 0, 131072, 6, 0, 131073, 6, 0, 131083, 6, 0, 131084, 6, 0, 131085, 6, 0, 131086, 6, 0, 131087, 6, 0, 131088, 6, 0, 131089, 6, 0, 196608, 6, 0, 196609, 6, 0, 196622, 6, 0, 196623, 6, 0, 196624, 6, 0, 196625, 6, 0, 262144, 6, 0, 262145, 6, 0, 393219, 6, 0, 393220, 6, 0, 393227, 6, 0, 393233, 6, 0, 458762, 6, 0, 458763, 6, 0, 458766, 6, 0, 458767, 6, 0, 458769, 6, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524296, 6, 0, 524297, 6, 0, 524298, 6, 0, 524299, 6, 0, 524302, 6, 0, 524303, 6, 0, 524305, 6, 0, 589832, 6, 0, 589833, 6, 0, 589834, 6, 0, 589835, 6, 0, 589838, 6, 0, 589839, 6, 0, 589841, 6, 0 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_mirroring = Vector2( 1152, 768 )
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+modulate = Color( 0.0980392, 0.0666667, 0.0392157, 1 )
+z_index = 100
+texture = ExtResource( 7 )
+centered = false
+
+[node name="Player" parent="." instance=ExtResource( 8 )]
+position = Vector2( 40.4198, 475.909 )
+z_index = 2
