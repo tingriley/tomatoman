@@ -6,14 +6,15 @@ export(String, FILE, "*.tscn") var left_stage
 
 func _ready():
 	$Player/Camera2D.limit_right = global.camera_limits_x[3] * global.SIZE_X
+	$Player/Camera2D.limit_bottom = global.SIZE_Y *2 
 	global.current_stage = 3
 	
 	if 	global.prev_stage == 2:
 		$Player.position.x = 32
-		$Player.position.y = 607
+		$Player.position.y = 220
 	
 		
-	if 	global.prev_stage == 5:
+	if 	global.prev_stage == 6:
 		$Player.position.x = $Player/Camera2D.limit_right-32
 		$Player.position.y = 607
 		$Player/AnimatedSprite.flip_h = true

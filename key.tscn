@@ -6,16 +6,24 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Area2D
 
-
 onready var global = get_node(\"/root/Global\")
+const DIALOGBOX = preload(\"DialogBox.tscn\")
 
-# Called when the node enters the scene tree for the first time.
+
+func load_dialog_box(body):
+	body.get_node(\"CanvasLayer/DialogBox\").visible = true
+	body.get_node(\"CanvasLayer/DialogBox/DialogBox\").dialog[0] = '\\n\\t\\t\\tYou found a key. (Press DOWN to continue)'
+	body.get_node(\"CanvasLayer/DialogBox/DialogBox\").load_dialog()
+
+
 func _ready():
 	$AnimatedSprite.play(\"idle\")
 
-func _on_gun_body_entered(body):
-	print (body.name)
+
+
+func _on_key_body_entered(body):
 	if \"Player\" in body.name:
+		load_dialog_box(body)
 		global.green_key = true
 		if not body.is_powerup:
 			body.is_powerup = true
@@ -48,4 +56,5 @@ frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+[connection signal="body_entered" from="." to="." method="_on_key_body_entered"]
 [connection signal="body_entered" from="." to="." method="_on_gun_body_entered"]

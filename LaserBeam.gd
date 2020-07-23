@@ -26,7 +26,7 @@ func _ready():
 
 
 func _physics_process(delta):
-
+	
 
 	if collision_point == null:
 		collision_point = raycast.get_collision_point() - Vector2(0, 16)

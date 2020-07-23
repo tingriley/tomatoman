@@ -1,16 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://CandytTile.tres" type="TileSet" id=1]
+[ext_resource path="res://Stage6.gd" type="Script" id=2]
+[ext_resource path="res://LadderMid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ladders.tscn" type="PackedScene" id=4]
+[ext_resource path="res://BlueLock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Background/bg_pink.png" type="Texture" id=7]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=8]
 
 [node name="Stage6" type="Node2D"]
+script = ExtResource( 2 )
+up_stage = "res://Stage7.tscn"
+up_stage2 = "res://Stage8.tscn"
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( -983040, 6, 0, -983039, 6, 0, -983038, 6, 0, -983037, 6, 0, -983036, 6, 0, -983035, 6, 0, -983034, 6, 0, -983033, 6, 0, -983032, 6, 0, -983031, 6, 0, -983030, 6, 0, -983029, 6, 0, -983028, 6, 0, -983027, 6, 0, -983026, 6, 0, -983025, 6, 0, -983024, 6, 0, -983023, 6, 0, -851957, 8, 0, -786421, 8, 0, -720887, 8, 0, -720886, 8, 0, -720885, 8, 0, -720884, 8, 0, -720883, 8, 0, -655349, 8, 0, -655343, 6, 0, -589821, 16, 0, -589820, 16, 0, -589819, 16, 0, -589818, 16, 0, -589813, 8, 0, -589807, 6, 0, -524271, 6, 0, -458751, 6, 0, -458735, 6, 0, -393216, 6, 0, -393215, 6, 0, -393214, 6, 0, -393199, 6, 0, -327679, 6, 0, -327663, 6, 0, -262140, 16, 0, -262139, 16, 0, -262127, 6, 0, -196591, 6, 0, -131064, 5, 0, -131063, 7, 0, -131055, 6, 0, -65519, 6, 0, 0, 6, 0, 1, 6, 0, 2, 6, 0, 14, 6, 0, 15, 6, 0, 16, 6, 0, 17, 6, 0, 65536, 6, 0, 65537, 6, 0, 65538, 6, 0, 65547, 6, 0, 65548, 6, 0, 65549, 6, 0, 65550, 6, 0, 65551, 6, 0, 65552, 6, 0, 65553, 6, 0, 131072, 6, 0, 131073, 6, 0, 131082, 6, 0, 131083, 6, 0, 131084, 6, 0, 131085, 6, 0, 131086, 6, 0, 131087, 6, 0, 131088, 6, 0, 131089, 6, 0, 196608, 6, 0, 196609, 6, 0, 196615, 6, 0, 196616, 6, 0, 196617, 6, 0, 196618, 6, 0, 196619, 6, 0, 196620, 6, 0, 196621, 6, 0, 196622, 6, 0, 196623, 6, 0, 196624, 6, 0, 196625, 6, 0, 262144, 6, 0, 262145, 6, 0, 393219, 6, 0, 393220, 6, 0, 393227, 6, 0, 393233, 6, 0, 458762, 6, 0, 458763, 6, 0, 458766, 6, 0, 458767, 6, 0, 458769, 6, 0, 524288, 1, 0, 524289, 2, 0, 524290, 3, 0, 524296, 6, 0, 524297, 6, 0, 524298, 6, 0, 524299, 6, 0, 524302, 6, 0, 524303, 6, 0, 524305, 6, 0, 589832, 6, 0, 589833, 6, 0, 589834, 6, 0, 589835, 6, 0, 589838, 6, 0, 589839, 6, 0, 589841, 6, 0 )
+tile_data = PoolIntArray( 0, 36, 0, 1, 36, 0, 2, 36, 0, 3, 36, 0, 5, 36, 0, 6, 36, 0, 7, 36, 0, 8, 36, 0, 9, 36, 0, 10, 36, 0, 11, 36, 0, 13, 36, 0, 14, 36, 0, 15, 36, 0, 16, 36, 0, 17, 36, 0, 65553, 6, 0, 131089, 6, 0, 196609, 12, 0, 196625, 6, 0, 262147, 1, 0, 262148, 2, 0, 262149, 2, 0, 262150, 3, 0, 262161, 6, 0, 327690, 1, 0, 327691, 2, 0, 327692, 2, 0, 327693, 2, 0, 327694, 3, 0, 327697, 6, 0, 393233, 6, 0, 458758, 1, 0, 458759, 3, 0, 458769, 6, 0, 524305, 6, 0, 589841, 6, 0, 655366, 2, 0, 655367, 2, 0, 655368, 2, 0, 655369, 2, 0, 655370, 2, 0, 720896, 6, 0, 720897, 6, 0, 720898, 6, 0, 720899, 6, 0, 720900, 6, 0, 720901, 6, 0, 720902, 6, 0, 720903, 6, 0, 720904, 6, 0, 720905, 6, 0, 720906, 6, 0, 720907, 6, 0, 720908, 6, 0, 720909, 6, 0, 720910, 6, 0, 720911, 6, 0, 720912, 6, 0, 720913, 6, 0 )
+
+[node name="BlueLock" parent="TileMap" instance=ExtResource( 5 )]
+position = Vector2( 1120.72, 672.725 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -26,5 +36,34 @@ texture = ExtResource( 7 )
 centered = false
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 40.4198, 475.909 )
+position = Vector2( 89.7184, 672 )
 z_index = 2
+
+[node name="Ladders" parent="." instance=ExtResource( 4 )]
+
+[node name="LadderMid" parent="Ladders" instance=ExtResource( 3 )]
+position = Vector2( 768, 256 )
+
+[node name="LadderMid2" parent="Ladders" instance=ExtResource( 3 )]
+position = Vector2( 768, 192 )
+
+[node name="LadderMid3" parent="Ladders" instance=ExtResource( 3 )]
+position = Vector2( 768, 128 )
+
+[node name="LadderMid4" parent="Ladders" instance=ExtResource( 3 )]
+position = Vector2( 768, 64 )
+
+[node name="LadderMid5" parent="Ladders" instance=ExtResource( 3 )]
+position = Vector2( 768, 0 )
+
+[node name="LadderMid6" parent="Ladders" instance=ExtResource( 3 )]
+position = Vector2( 256, 192 )
+
+[node name="LadderMid7" parent="Ladders" instance=ExtResource( 3 )]
+position = Vector2( 256, 128 )
+
+[node name="LadderMid8" parent="Ladders" instance=ExtResource( 3 )]
+position = Vector2( 256, 64 )
+
+[node name="LadderMid9" parent="Ladders" instance=ExtResource( 3 )]
+position = Vector2( 256, 0 )

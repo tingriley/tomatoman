@@ -28,7 +28,9 @@ func _on_Fireball_body_entered(body):
 	if "FlyingEnemy" == body.name:
 		body.get_parent().dead()
 	elif "Enemy" in body.name:
-		body.dead()
+		body.dead(1)
+	elif "Giant" in body.name:
+		body.dead(1)
 	queue_free()
 
 

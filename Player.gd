@@ -29,8 +29,10 @@ var is_up = false
 var is_down = false
 var is_shooting = false
 var is_powerup = false
-
-var state = "NONE"
+var is_climbing_up = false
+var is_climbing_down = false
+var is_tween_to_center = false
+var can_climb_down = false
 
 var change_scene = false
 
@@ -39,7 +41,11 @@ func _ready():
 	gravity = 2*MAX_JUMP_HEIGHT / pow(jump_duration, 2)      # s = 1/2 at^2
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT) # v^2 = 2as
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT) # v^2 = 2as
+	$AnimatedSprite/gun.visible = false
 
+func set_is_back(b):
+	is_back = b
+	
 func shoot():
 	var fireball = null
 	fireball = FIREBALL.instance()
@@ -61,9 +67,9 @@ func shoot_down():
 	fireball.set_direction(1)
 	get_parent().add_child(fireball)
 	fireball.position = $DownPosition2D.global_position
-	
-func dead():
 
+
+func dead():
 	if not is_damage:
 		global.hp -= 1
 		$CanvasLayer/HealthBar._on_health_updated(global.hp*10, 0)
@@ -73,55 +79,84 @@ func dead():
 		is_damage = false
 	if global.hp <= 0:
 		is_dead = true 
-		$dead.play()
 		$AnimatedSprite.play("dead")
 		yield(get_tree().create_timer(2.5), "timeout")
 		get_tree().change_scene("res://Stage" + str(global.current_stage) + ".tscn")
 		global.hp = 10
 
+
 func high_jump():
 	velocity.y = max_jump_velocity * 1.25
+
+
+func tween_to_ladder_center():
+	var pos_x = (floor(position.x/64)*64) + 32
+	position.x = pos_x
+	#$TweenLadder.tween_position(pos_x, position.y)
+	is_on_ladder = true
+
 
 
 
 func move_right():
 	if not is_damage and not is_powerup:
-		$AnimatedSprite.play("run")
-	velocity.x = SPEED
+		velocity.x = SPEED
 	$AnimatedSprite.flip_h = false
+	$AnimatedSprite/gun.flip_h = false
 	if sign($Position2D.position.x) < 0:
 		$Position2D.position.x *= -1
+		$Position2D2.position.x *= -1
 		$UpPosition2D.position.x *= -1
 		$DownPosition2D.position.x *= -1
+	
+	$AnimatedSprite/gun.position = $Position2D2.position	
+
+func flip_player_to_left():
+	$AnimatedSprite.flip_h = true
+	$AnimatedSprite/gun.flip_h = true
+
+	if sign($Position2D.position.x) > 0:
+		$Position2D.position.x *= -1
+		$Position2D2.position.x *= -1
+		$UpPosition2D.position.x *= -1
+		$DownPosition2D.position.x *= -1
+	$AnimatedSprite/gun.position = $Position2D2.position	
 
 func move_left():
 	if not is_damage and not is_powerup:
-		$AnimatedSprite.play("run")
-	velocity.x = -SPEED
+		velocity.x = -SPEED
 	$AnimatedSprite.flip_h = true
+	$AnimatedSprite/gun.flip_h = true
+
 	if sign($Position2D.position.x) > 0:
 		$Position2D.position.x *= -1
+		$Position2D2.position.x *= -1
 		$UpPosition2D.position.x *= -1
 		$DownPosition2D.position.x *= -1
+	$AnimatedSprite/gun.position = $Position2D2.position	
 
 
 func _physics_process(delta):
 	$CanvasLayer/HealthBar._on_health_updated(global.hp*10, 0)
 	$CanvasLayer/Label.text = str(global.hp)
 	
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if "Invisible" in collision.collider.name:
+			var collider = collision.collider
+			collider.visible = true
+			collider.get_node("CollisionShape2D").one_way_collision = false
+	
+	
 	if not is_dead:
-		
+		if global.gun_found:
+			$AnimatedSprite/gun.visible = true
 		var s = global.current_stage
 		
 		position.x = clamp(position.x, $Camera2D.limit_left, $Camera2D.limit_right) #limit the player inside map
 		position.y = clamp(position.y, $Camera2D.limit_top, $Camera2D.limit_bottom)
 		
-		if is_damage:
-			$AnimatedSprite.play("damage")
-		elif is_powerup:
-			$AnimatedSprite.play("powerup")
-
-			
+	
 
 		if position.y <= 0:
 			if global.move_camera == false:
@@ -139,16 +174,22 @@ func _physics_process(delta):
 		elif Input.is_action_pressed("ui_left"):
 			move_left()
 		else:
-			if not is_damage:
-				$AnimatedSprite.play("idle")
 			velocity.x = 0
 		
 		if Input.is_action_pressed("ui_up"):
+			if is_on_ladder:
+				is_climbing_up = true
+				is_climbing_down = false
 			is_up = true
 		else:
 			is_up = false
 			
 		if Input.is_action_pressed("ui_down"):
+			if is_on_ladder or can_climb_down:
+				is_climbing_down = true
+				is_climbing_up = false
+			if !is_on_floor():
+				velocity.y = -max_jump_velocity
 			is_down = true
 		else:
 			is_down = false
@@ -159,7 +200,7 @@ func _physics_process(delta):
 				velocity.y = max_jump_velocity
 		
 		if Input.is_action_just_pressed("ui_focus_next"):
-			if state != "NONE":
+			if global.gun_found:
 				if is_up:
 					shoot_up()
 				elif is_down:
@@ -174,8 +215,40 @@ func _physics_process(delta):
 		if velocity.y > 0 :
 			is_jumping = false
 		
-	velocity.y += gravity * delta
-	velocity = move_and_slide(velocity, FLOOR)
+		if is_climbing_down:
+			get_parent().get_node("Ladders").disable_collision()
+			if not is_tween_to_center:
+				tween_to_ladder_center()
+				is_tween_to_center = true
+			velocity.y = 150
+		
+		elif is_on_ladder:
+			if is_climbing_up:
+				get_parent().get_node("Ladders").enable_collision()
+				if not is_tween_to_center:
+					tween_to_ladder_center()
+					is_tween_to_center = true
+				velocity.y = -150
+			elif is_climbing_down:
+				get_parent().get_node("Ladders").disable_collision()
+				if not is_tween_to_center:
+					tween_to_ladder_center()
+					is_tween_to_center = true
+				velocity.y = 150
+			else:
+				velocity.y = 0
+		else:
+			velocity.y += gravity * delta
+			is_climbing_up = false
+			is_climbing_down = false
+			is_tween_to_center = false
+		
+		if not is_on_ladder:
+			is_climbing_up = false
+			is_climbing_down = false
+
+		
+		velocity = move_and_slide(velocity, FLOOR)
 
 func _input(event):
 	if event is InputEventKey:

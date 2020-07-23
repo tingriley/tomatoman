@@ -1,0 +1,45 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://GreenLock.gd" type="Script" id=1]
+[ext_resource path="res://Assets/lock_green2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/lock_green4.png" type="Texture" id=3]
+[ext_resource path="res://Assets/lock_green3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/lock_green.png" type="Texture" id=5]
+[ext_resource path="res://Assets/lock_green1.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "open",
+"speed": 4.0
+} ]
+
+[node name="GreenLock" type="Area2D"]
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+frames = SubResource( 3 )
+animation = "idle"
+[connection signal="body_entered" from="." to="." method="_on_GreenLock_body_entered"]
+[connection signal="animation_finished" from="KinematicBody2D/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

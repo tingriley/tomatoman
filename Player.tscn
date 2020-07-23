@@ -12,38 +12,45 @@
 [ext_resource path="res://Assets/damage3.png" type="Texture" id=10]
 [ext_resource path="res://Assets/powerup1.png" type="Texture" id=11]
 [ext_resource path="res://Assets/damage2.png" type="Texture" id=12]
-[ext_resource path="res://Assets/question.png" type="Texture" id=13]
-[ext_resource path="res://Assets/question2.png" type="Texture" id=14]
-[ext_resource path="res://Assets/question3.png" type="Texture" id=15]
-[ext_resource path="res://Assets/purple_question2.png" type="Texture" id=16]
-[ext_resource path="res://Assets/purple_question.png" type="Texture" id=17]
-[ext_resource path="res://Assets/purple_question3.png" type="Texture" id=18]
-[ext_resource path="res://Assets/green_question2.png" type="Texture" id=19]
-[ext_resource path="res://Assets/green_question.png" type="Texture" id=20]
-[ext_resource path="res://Assets/green_question3.png" type="Texture" id=21]
+[ext_resource path="res://Assets/gun_item.png" type="Texture" id=13]
+[ext_resource path="res://Assets/gun.png" type="Texture" id=14]
+[ext_resource path="res://ScreenShake.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/gun_gray.png" type="Texture" id=16]
+[ext_resource path="res://Assets/back.png" type="Texture" id=17]
+[ext_resource path="res://Assets/back2.png" type="Texture" id=18]
+[ext_resource path="res://Assets/back3.png" type="Texture" id=19]
+[ext_resource path="res://Assets/idle2.png" type="Texture" id=20]
+[ext_resource path="res://Assets/idle1.png" type="Texture" id=21]
 [ext_resource path="res://CanvasLayer.gd" type="Script" id=22]
+[ext_resource path="res://Tween.gd" type="Script" id=23]
+[ext_resource path="res://DialogBox.tscn" type="PackedScene" id=24]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "run",
-"speed": 5.0
+"name": "powerup",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "damage",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ) ],
 "loop": true,
-"name": "powerup",
-"speed": 10.0
+"name": "run",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -55,37 +62,30 @@ font_data = ExtResource( 7 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 16 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=5]
-animations = [ {
-"frames": [ ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 16 ) ],
+}, {
+"frames": [ ExtResource( 13 ) ],
 "loop": true,
-"name": "idle",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=6]
-animations = [ {
-"frames": [ ExtResource( 20 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "idle",
+"name": "found",
 "speed": 5.0
 } ]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
-collision_mask = 5
 script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "powerup"
+animation = "idle"
 playing = true
+
+[node name="gun" type="Sprite" parent="AnimatedSprite"]
+position = Vector2( 35.6434, 7.2916 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.614708, 4.61032 )
@@ -103,6 +103,9 @@ smoothing_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource( 22 )
+
+[node name="DialogBox" parent="CanvasLayer" instance=ExtResource( 24 )]
+visible = false
 
 [node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 6 )]
 margin_left = 40.4198
@@ -122,24 +125,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OrangeQuestion" type="AnimatedSprite" parent="CanvasLayer"]
-position = Vector2( 280, 27.3017 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="CanvasLayer"]
+position = Vector2( 965.1, 32.0174 )
 frames = SubResource( 4 )
 animation = "idle"
 
-[node name="PurpleQuestion" type="AnimatedSprite" parent="CanvasLayer"]
-position = Vector2( 225, 27.302 )
-frames = SubResource( 5 )
-animation = "idle"
-frame = 3
-
-[node name="GreenQuestion" type="AnimatedSprite" parent="CanvasLayer"]
-position = Vector2( 335, 27.302 )
-frames = SubResource( 6 )
-animation = "idle"
-
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 36.3765, 12.1255 )
+position = Vector2( 52.1182, 4.05352 )
+
+[node name="Position2D2" type="Position2D" parent="."]
+position = Vector2( 35.3677, 7.10479 )
 
 [node name="UpPosition2D" type="Position2D" parent="."]
 position = Vector2( -0.418121, -38.049 )
@@ -152,4 +147,9 @@ wait_time = 0.2
 
 [node name="State" type="Node2D" parent="."]
 script = ExtResource( 8 )
+
+[node name="ScreenShake" parent="." instance=ExtResource( 15 )]
+
+[node name="TweenLadder" type="Tween" parent="."]
+script = ExtResource( 23 )
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

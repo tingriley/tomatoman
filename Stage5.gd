@@ -13,7 +13,6 @@ func update_alpha():
 func _ready():
 	set_modulate(Color(1,1,1,alpha))
 	$Player/Camera2D.limit_right = global.camera_limits_x[5] * global.SIZE_X
-	$Player/Camera2D.limit_bottom = 2 * global.SIZE_Y
 	global.current_stage = 5
 	
 	if 	global.prev_stage == 3:
