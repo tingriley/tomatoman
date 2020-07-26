@@ -27,6 +27,11 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 8 ), ExtResource( 15 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "die",
+"speed": 20.0
+}, {
 "frames": [ ExtResource( 3 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "damage",
@@ -36,11 +41,6 @@ animations = [ {
 "loop": false,
 "name": "attack",
 "speed": 50.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 15 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "die",
-"speed": 20.0
 } ]
 
 [node name="Snowman" type="KinematicBody2D"]

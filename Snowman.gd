@@ -6,7 +6,7 @@ const MAX_JUMP_HEIGHT = 64*4
 onready var player = get_parent().get_node("Player")
 
 var jump_duration = 0.45
-var hp = 1
+var hp = 40
 var direction = 1 #right
 var player_position = Vector2(0, 0)
 var velocity = Vector2(0, 0)
@@ -30,11 +30,12 @@ func flip():
 
 func dead(damage):
 	if hp >= 1:
-		
 		$AnimatedSprite.play("damage")
-		yield(get_tree().create_timer(0.7), "timeout")
-		$AnimatedSprite.play("idle")
 		hp -= damage
+		if hp >= 1:
+			yield(get_tree().create_timer(0.7), "timeout")
+			$AnimatedSprite.play("idle")
+		
 		
 	if hp <= 0:
 		if not is_dead:
