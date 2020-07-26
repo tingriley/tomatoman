@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Stage10.gd" type="Script" id=1]
 [ext_resource path="res://CandytTile.tres" type="TileSet" id=2]
 [ext_resource path="res://Background/bg_pink.png" type="Texture" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Snowman.tscn" type="PackedScene" id=5]
-[ext_resource path="res://StaticBlock.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Shake.gd" type="Script" id=7]
 
 [node name="Stage10" type="Node2D"]
@@ -36,18 +35,7 @@ z_index = 2
 
 [node name="Snowman" parent="." instance=ExtResource( 5 )]
 position = Vector2( 838.111, 649.783 )
-
-[node name="StaticBlock" parent="." instance=ExtResource( 6 )]
-position = Vector2( 230, 530 )
-
-[node name="StaticBlock2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 294, 530 )
-
-[node name="StaticBlock3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 834, 530 )
-
-[node name="StaticBlock4" parent="." instance=ExtResource( 6 )]
-position = Vector2( 770, 530 )
+z_index = 2
 
 [node name="Shake" type="Node2D" parent="."]
 script = ExtResource( 7 )

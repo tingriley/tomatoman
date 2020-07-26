@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Snowman.gd" type="Script" id=1]
 [ext_resource path="res://Assets/snowman1.png" type="Texture" id=2]
@@ -8,8 +8,14 @@
 [ext_resource path="res://Assets/snowman5.png" type="Texture" id=6]
 [ext_resource path="res://Assets/snowman6.png" type="Texture" id=7]
 [ext_resource path="res://Assets/snowman_die1.png" type="Texture" id=8]
-[ext_resource path="res://Assets/snowman_die2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/snowman_die7.png" type="Texture" id=9]
 [ext_resource path="res://Assets/snowman_die3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/snowman_die4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/snowman_damage.png" type="Texture" id=12]
+[ext_resource path="res://Assets/snowman_die5.png" type="Texture" id=13]
+[ext_resource path="res://Assets/snowman_die6.png" type="Texture" id=14]
+[ext_resource path="res://Assets/snowman_die2.png" type="Texture" id=15]
+[ext_resource path="res://Assets/snowman_die8.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40, 50 )
@@ -21,20 +27,20 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 3 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "damage",
+"speed": 15.0
+}, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": false,
 "name": "attack",
 "speed": 50.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "damage",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 15 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "die",
-"speed": 5.0
+"speed": 20.0
 } ]
 
 [node name="Snowman" type="KinematicBody2D"]
@@ -47,6 +53,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "die"
+frame = 3
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -59,7 +66,7 @@ position = Vector2( 50, 12 )
 autostart = true
 
 [node name="WalkTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 6.0
 autostart = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="PlayerPositionTimer" to="." method="_on_PlayerPositionTimer_timeout"]
