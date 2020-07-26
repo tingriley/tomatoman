@@ -140,12 +140,6 @@ func _physics_process(delta):
 	$CanvasLayer/HealthBar._on_health_updated(global.hp*10, 0)
 	$CanvasLayer/Label.text = str(global.hp)
 	
-	for i in get_slide_count():
-		var collision = get_slide_collision(i)
-		if "Invisible" in collision.collider.name:
-			var collider = collision.collider
-			collider.visible = true
-			collider.get_node("CollisionShape2D").one_way_collision = false
 	
 	
 	if not is_dead:

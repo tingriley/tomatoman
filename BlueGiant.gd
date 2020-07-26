@@ -49,6 +49,7 @@ func dead(damage):
 		is_dead = true
 		set_global_dead_flag()
 		play_dead_animation()
+		queue_free()
 
 
 func _physics_process(delta):

@@ -17,6 +17,7 @@ func _on_gun_body_entered(body):
 	if "Player" in body.name:
 		load_dialog_box(body)
 		if not body.is_powerup:
+			global.score += 1000
 			body.is_powerup = true
 			global.gun_found = true
 			visible = false

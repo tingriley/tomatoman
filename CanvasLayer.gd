@@ -1,11 +1,9 @@
 extends CanvasLayer
+onready var global = get_node("/root/Global")
 
-
- 
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
-
+func _process(delta):
+	$Label2.text = str(global.score)
+	$Label3.text = str(global.coin)

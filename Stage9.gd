@@ -1,8 +1,8 @@
 extends Node2D
 
 onready var global = get_node("/root/Global")
-export(String, FILE, "*.tscn") var right_stage
-
+export(String, FILE, "*.tscn") var down_stage
+export(String, FILE, "*.tscn") var left_stage
 var alpha = 0
 var init_climb_up = true
 var block_clear = false
@@ -17,15 +17,28 @@ func _ready():
 	$Player/Camera2D.limit_right = global.camera_limits_x[5] * global.SIZE_X
 	global.current_stage = 9
 	
+
+	
 	
 func _process(delta):
+	print($Giants.get_num_childern())
+	if $Giants.get_num_childern() == 0:
+		if not block_clear:
+			block_clear = true
+			$Block/AnimatedSprite.play("open")
+			$Block2/AnimatedSprite.play("open")
+			yield(get_tree().create_timer(1), "timeout")
+			$Block.queue_free()
+			$Block2.queue_free()
+			
 	update_alpha()
 	if init_climb_up:
 		$Player.is_climbing_up = true
 	global.prev_stage = 9
-	if $Player.position.x >= $Player/Camera2D.limit_right:
-		yield(get_tree().create_timer(0.5), "timeout")
-		get_tree().change_scene(right_stage)
+	if $Player.position.y >= 768:
+		yield(get_tree().create_timer(0.1), "timeout")
+		get_tree().change_scene(down_stage)
+	
 
 
 

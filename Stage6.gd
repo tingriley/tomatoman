@@ -24,6 +24,9 @@ func _ready():
 	if 	global.prev_stage == 7:
 		$Player.position.x = 288
 		$Player.position.y = 32
+	if 	global.prev_stage == 9:
+		$Player.position.x = 768
+		$Player.position.y = 32
 
 	
 func _process(delta):

@@ -1,27 +1,26 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://CandytTile.tres" type="TileSet" id=1]
-[ext_resource path="res://ladders.tscn" type="PackedScene" id=2]
-[ext_resource path="res://LadderTop.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Stage7.gd" type="Script" id=4]
-[ext_resource path="res://ThrowingEnemy.tscn" type="PackedScene" id=5]
-[ext_resource path="res://InvisibleBlock.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Background/bg_pink.png" type="Texture" id=7]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Stage7.gd" type="Script" id=1]
+[ext_resource path="res://CandytTile.tres" type="TileSet" id=2]
+[ext_resource path="res://Background/bg_pink.png" type="Texture" id=3]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ladders.tscn" type="PackedScene" id=5]
+[ext_resource path="res://LadderTop.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Enemies.gd" type="Script" id=7]
+[ext_resource path="res://ThrowingEnemy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Block.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Enemies.gd" type="Script" id=10]
-[ext_resource path="res://Treasure.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Treasure.tscn" type="PackedScene" id=10]
 
 [node name="Stage7" type="Node2D"]
-script = ExtResource( 4 )
+script = ExtResource( 1 )
 down_stage = "res://Stage6.tscn"
-left_stage = "res://Stage9.tscn"
+left_stage = "res://Stage8.tscn"
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 2 )
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( -65536, 6, 0, -65535, 6, 0, -65534, 6, 0, -65533, 6, 0, -65532, 6, 0, -65531, 6, 0, -65530, 6, 0, -65529, 6, 0, -65528, 6, 0, -65527, 6, 0, -65526, 6, 0, -65525, 6, 0, -65524, 6, 0, -65523, 6, 0, -65522, 6, 0, -65521, 6, 0, -65520, 6, 0, -65519, 6, 0, 0, 6, 0, 17, 6, 0, 65536, 6, 0, 65553, 6, 0, 131072, 6, 0, 131089, 6, 0, 196625, 6, 0, 262150, 2, 0, 262151, 2, 0, 262152, 2, 0, 262161, 6, 0, 327680, 6, 0, 327681, 2, 0, 327697, 6, 0, 393216, 6, 0, 393217, 6, 0, 393218, 2, 0, 393227, 2, 0, 393228, 2, 0, 393229, 2, 0, 393233, 6, 0, 458752, 6, 0, 458753, 6, 0, 458754, 6, 0, 458755, 2, 0, 458769, 6, 0, 524288, 6, 0, 524305, 6, 0, 589824, 6, 0, 589841, 6, 0, 655360, 6, 0, 655377, 6, 0, 720896, 2, 0, 720897, 2, 0, 720898, 2, 0, 720899, 2, 0, 720901, 2, 0, 720902, 2, 0, 720903, 2, 0, 720904, 2, 0, 720905, 2, 0, 720906, 2, 0, 720907, 2, 0, 720908, 2, 0, 720909, 2, 0, 720910, 2, 0, 720911, 2, 0, 720912, 2, 0, 720913, 6, 0 )
+tile_data = PoolIntArray( -65536, 6, 0, -65535, 6, 0, -65534, 6, 0, -65533, 6, 0, -65532, 6, 0, -65531, 6, 0, -65530, 6, 0, -65529, 6, 0, -65528, 6, 0, -65527, 6, 0, -65526, 6, 0, -65525, 6, 0, -65524, 6, 0, -65523, 6, 0, -65522, 6, 0, -65521, 6, 0, -65520, 6, 0, -65519, 6, 0, 0, 6, 0, 17, 6, 0, 65536, 6, 0, 65553, 6, 0, 131072, 6, 0, 131089, 6, 0, 196625, 6, 0, 262150, 2, 0, 262151, 2, 0, 262152, 2, 0, 262161, 6, 0, 327680, 6, 0, 327681, 2, 0, 327697, 6, 0, 393216, 6, 0, 393217, 6, 0, 393218, 2, 0, 393227, 2, 0, 393228, 2, 0, 393229, 2, 0, 393233, 6, 0, 458752, 6, 0, 458753, 6, 0, 458754, 6, 0, 458755, 2, 0, 458769, 6, 0, 524288, 6, 0, 524305, 6, 0, 589824, 6, 0, 589830, 2, 0, 589831, 2, 0, 589832, 2, 0, 589833, 2, 0, 589841, 6, 0, 655360, 6, 0, 655377, 6, 0, 720896, 2, 0, 720897, 2, 0, 720898, 2, 0, 720899, 2, 0, 720901, 2, 0, 720902, 2, 0, 720903, 2, 0, 720904, 2, 0, 720905, 2, 0, 720906, 2, 0, 720907, 2, 0, 720908, 2, 0, 720909, 2, 0, 720910, 2, 0, 720911, 2, 0, 720912, 2, 0, 720913, 6, 0 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -33,16 +32,16 @@ motion_mirroring = Vector2( 1152, 768 )
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 modulate = Color( 0.0980392, 0.0666667, 0.0392157, 1 )
 z_index = 100
-texture = ExtResource( 7 )
+texture = ExtResource( 3 )
 centered = false
 
-[node name="Player" parent="." instance=ExtResource( 8 )]
+[node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 288, 738 )
 z_index = 2
 
-[node name="Ladders" parent="." instance=ExtResource( 2 )]
+[node name="Ladders" parent="." instance=ExtResource( 5 )]
 
-[node name="LadderTop" parent="Ladders" instance=ExtResource( 3 )]
+[node name="LadderTop" parent="Ladders" instance=ExtResource( 6 )]
 position = Vector2( 256, 704 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -50,40 +49,13 @@ wait_time = 1.5
 one_shot = true
 autostart = true
 
-[node name="InvisibleBlock" parent="." instance=ExtResource( 6 )]
-position = Vector2( 540, 570 )
-
-[node name="InvisibleBlock4" parent="." instance=ExtResource( 6 )]
-position = Vector2( 476, 570 )
-
-[node name="InvisibleBlock5" parent="." instance=ExtResource( 6 )]
-position = Vector2( 412, 570 )
-
-[node name="InvisibleBlock6" parent="." instance=ExtResource( 6 )]
-position = Vector2( 732, 570 )
-
-[node name="InvisibleBlock7" parent="." instance=ExtResource( 6 )]
-position = Vector2( 796, 570 )
-
-[node name="InvisibleBlock8" parent="." instance=ExtResource( 6 )]
-position = Vector2( 860, 570 )
-
-[node name="InvisibleBlock9" parent="." instance=ExtResource( 6 )]
-position = Vector2( 924, 570 )
-
-[node name="InvisibleBlock2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 604, 570 )
-
-[node name="InvisibleBlock3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 668, 570 )
-
 [node name="Enemies" type="Node2D" parent="."]
-script = ExtResource( 10 )
+script = ExtResource( 7 )
 
-[node name="ThrowingEnemy" parent="Enemies" instance=ExtResource( 5 )]
+[node name="ThrowingEnemy" parent="Enemies" instance=ExtResource( 8 )]
 position = Vector2( 828, 343.121 )
 
-[node name="ThrowingEnemy2" parent="Enemies" instance=ExtResource( 5 )]
+[node name="ThrowingEnemy2" parent="Enemies" instance=ExtResource( 8 )]
 position = Vector2( 508, 219.528 )
 
 [node name="Block" parent="." instance=ExtResource( 9 )]
@@ -92,6 +64,6 @@ position = Vector2( 32, 288 )
 [node name="Block2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 32, 224 )
 
-[node name="Treasure" parent="." instance=ExtResource( 11 )]
+[node name="Treasure" parent="." instance=ExtResource( 10 )]
 position = Vector2( 592.592, 661.621 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

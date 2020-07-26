@@ -8,6 +8,6 @@ func _ready():
 
 func _process(delta):
 	pass
-	global_position = playerTarget.global_position
+	#global_position = playerTarget.global_position
 	
 	

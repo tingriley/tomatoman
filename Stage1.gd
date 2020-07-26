@@ -22,7 +22,6 @@ func _process(delta):
 		alpha += 0.05
 	
 	if $Player.position.x >= $Player/Camera2D.limit_right and Input.is_action_pressed("ui_right"):
-		yield(get_tree().create_timer(0.5), "timeout")
 		get_tree().change_scene(right_stage)
 	if $Player.position.x <= 0 and Input.is_action_pressed("ui_left"):
 		yield(get_tree().create_timer(0.5), "timeout")

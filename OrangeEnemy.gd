@@ -4,6 +4,7 @@ const GRAVITY = 20
 const FLOOR = Vector2(0, -1)
 const LASER = preload("LaserOrange.tscn")
 const SPEED = 350
+const SCORE = 100
 
 var velocity = Vector2()
 
@@ -11,7 +12,7 @@ var direction = -1 # left
 
 var is_dead = false
 
-onready var player_vars = get_node("/root/Global")
+onready var global = get_node("/root/Global")
 
 
 export(int) var speed = 80 # edit in the inspector
@@ -27,12 +28,14 @@ func _ready():
 	is_shooting = true
 	$Timer.start()
 
+
 	
 func dead(damage):
 	if not $dead.playing:
 		$dead.play()
 	hp -= damage 
 	if hp <= 0:
+		global.score += SCORE
 		is_dead = true
 		$AnimatedSprite.play("dead")
 		$CollisionShape2D.set_deferred("disabled", true) 

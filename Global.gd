@@ -19,8 +19,10 @@ var green_lock_open = false
 var blue_key_found = true
 var blue_lock_open = false
 
+var score = 0
+var coin = 0
 
-const SIZE_X = 1152
+const SIZE_X = 1152	
 const SIZE_Y = 768
 
 func _ready():

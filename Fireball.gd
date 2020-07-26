@@ -31,6 +31,8 @@ func _on_Fireball_body_entered(body):
 		body.dead(1)
 	elif "Giant" in body.name:
 		body.dead(1)
+	elif "Snowman" in body.name:
+		body.dead(1)
 	queue_free()
 
 
