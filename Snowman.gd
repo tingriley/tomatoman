@@ -4,23 +4,24 @@ const SNOWBALL = preload("Snowball.tscn")
 const FLOOR = Vector2(0, -1)
 const MAX_JUMP_HEIGHT = 64*4
 onready var player = get_parent().get_node("Player")
+export var hp = 40
 
 var jump_duration = 0.45
-var hp = 40
+
 var direction = 1 #right
 var player_position = Vector2(0, 0)
 var velocity = Vector2(0, 0)
 var is_jumping = false
 var is_dead = false
+var start = false
 
-var gravity
+var gravity = 100
 var max_jump_velocity 
 	
 func _ready():
 	$AnimatedSprite.play("idle")
 	player_position = player.position
-	gravity = 2*MAX_JUMP_HEIGHT / pow(jump_duration, 2)      # s = 1/2 at^2
-	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT) # v^2 = 2as
+
 	
 
 func flip():
@@ -39,12 +40,13 @@ func dead(damage):
 		
 	if hp <= 0:
 		if not is_dead:
-			get_parent().get_node("Shake").screen_shake(1, 15, 100)
+
 			$PlayerPositionTimer.queue_free()
 			$WalkTimer.queue_free()
 			is_dead = true
 			$AnimatedSprite.play("die")
 			yield(get_tree().create_timer(3), "timeout")
+			get_parent().get_node("BlueKey").start()
 			queue_free()
 		
 
@@ -60,6 +62,11 @@ func shoot():
 	snowball.position = $Position2D.global_position
 
 func _physics_process(delta):
+	if not start:
+		start = true
+		$WalkTimer.start()
+		$Timer.start()
+
 	if not is_dead:
 		if velocity.x == 0:
 			if player_position.x > position.x and direction == -1:

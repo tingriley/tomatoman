@@ -9,7 +9,7 @@ func _ready():
 
 func load_dialog_box(body):
 	body.get_node("CanvasLayer/DialogBox").visible = true
-	body.get_node("CanvasLayer/DialogBox/DialogBox").dialog[0] = '\n\t\t\tYou found a gun. (Press DOWN to continue)'
+	body.get_node("CanvasLayer/DialogBox/DialogBox").dialog[0] = '\n\t\t\tYou found a gun. Press X to fire. \n\t\t\t(Press DOWN to continue)'
 	body.get_node("CanvasLayer/DialogBox/DialogBox").load_dialog()
 
 func _on_gun_body_entered(body):

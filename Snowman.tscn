@@ -27,11 +27,6 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 15 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "die",
-"speed": 20.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "damage",
@@ -41,6 +36,11 @@ animations = [ {
 "loop": false,
 "name": "attack",
 "speed": 50.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 15 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "die",
+"speed": 20.0
 } ]
 
 [node name="Snowman" type="KinematicBody2D"]
@@ -57,7 +57,6 @@ frame = 3
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
-autostart = true
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 50, 12 )
@@ -67,7 +66,6 @@ autostart = true
 
 [node name="WalkTimer" type="Timer" parent="."]
 wait_time = 6.0
-autostart = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="PlayerPositionTimer" to="." method="_on_PlayerPositionTimer_timeout"]
 [connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]

@@ -40,7 +40,7 @@ cast_to = Vector2( 0, 32 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 9
+collision_mask = 11
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )

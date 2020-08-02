@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Chilly.gd" type="Script" id=1]
+[ext_resource path="res://Assets/chilly2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/chilly.png" type="Texture" id=3]
+[ext_resource path="res://Assets/chilly_damage.png" type="Texture" id=4]
+[ext_resource path="res://Assets/chilly_die.png" type="Texture" id=5]
+[ext_resource path="res://Assets/chilly_attck.png" type="Texture" id=6]
+[ext_resource path="res://Assets/chilly_walk.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "attack",
+"speed": 50.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "die",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "damage",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "walk",
+"speed": 20.0
+} ]
+
+[node name="Chilly" type="KinematicBody2D"]
+collision_layer = 4
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "walk"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( -54.2569, 47.8383 )
+
+[node name="PlayerPositionTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 24.0869, -94.4197, -6.8644, -67.541, -27.2271, -47.9928, -35.3721, -17.0416, -10.1224, 31.0143, 4.53871, 79.8848, 9.42575, 95.3604, 29.7884, 85.5863, 33.8609, 71.7397, 24.0869, 48.119, 26.5304, 12.2807, 28.1594, -29.2592, 22.4579, -55.3234, 13.4983, -70.799, 31.4174, -87.0892 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="PlayerPositionTimer" to="." method="_on_PlayerPositionTimer_timeout"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]

@@ -12,6 +12,7 @@ func _ready():
 func set_direction(dir):
 	direction = dir
 
+
 func _physics_process(delta):
 	velocity.x = (SPEED + abs(get_parent().get_node("Player").velocity.x)) * delta * direction
 	translate(velocity)

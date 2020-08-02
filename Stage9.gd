@@ -2,7 +2,7 @@ extends Node2D
 
 onready var global = get_node("/root/Global")
 export(String, FILE, "*.tscn") var down_stage
-export(String, FILE, "*.tscn") var left_stage
+export(String, FILE, "*.tscn") var right_stage
 var alpha = 0
 var init_climb_up = true
 var block_clear = false
@@ -21,7 +21,6 @@ func _ready():
 	
 	
 func _process(delta):
-	print($Giants.get_num_childern())
 	if $Giants.get_num_childern() == 0:
 		if not block_clear:
 			block_clear = true
@@ -39,7 +38,10 @@ func _process(delta):
 		yield(get_tree().create_timer(0.1), "timeout")
 		get_tree().change_scene(down_stage)
 	
-
+	if $Player.position.x >= 1152:
+		yield(get_tree().create_timer(0.1), "timeout")
+		get_tree().change_scene(right_stage)
+	
 
 
 func _on_Timer_timeout():

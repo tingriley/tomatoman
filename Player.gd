@@ -70,8 +70,8 @@ func shoot_down():
 
 
 func dead():
+	global.hp -= 1
 	if not is_damage:
-		global.hp -= 1
 		$CanvasLayer/HealthBar._on_health_updated(global.hp*10, 0)
 		$CanvasLayer/Label.text = str(global.hp)
 		is_damage = true
