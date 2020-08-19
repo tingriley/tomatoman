@@ -10,6 +10,7 @@ func load_dialog_box(body):
 	body.get_node("CanvasLayer/DialogBox/DialogBox").load_dialog()
 
 
+
 func _ready():
 	$AnimatedSprite.play("idle")
 
@@ -22,6 +23,6 @@ func _on_GreenKey_body_entered(body):
 		if not body.is_powerup:
 			body.is_powerup = true
 			visible = false
-			yield(get_tree().create_timer(1.0), "timeout")
+			yield(get_tree().create_timer(2.0), "timeout")
 			body.is_powerup = false
 			queue_free()

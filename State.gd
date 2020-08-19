@@ -28,7 +28,7 @@ func _get_transition(delta):
 				return states.damage
 			if parent.is_back:
 				return states.back
-			if parent.is_on_ladder:
+			if parent.is_climbing_up or parent.is_climbing_down:
 				return states.ladder
 			if not parent.is_on_floor():
 				if parent.velocity.y < 0 :
@@ -42,7 +42,7 @@ func _get_transition(delta):
 				return states.damage
 			if parent.is_back:
 				return states.back
-			if parent.is_on_ladder:
+			if parent.is_climbing_up or parent.is_climbing_down:
 				return states.ladder
 			if not parent.is_on_floor():
 				if parent.velocity.y < 0 :
@@ -56,7 +56,7 @@ func _get_transition(delta):
 				return states.damage
 			if parent.is_back:
 				return states.back
-			if parent.is_on_ladder:
+			if parent.is_climbing_up or parent.is_climbing_down:
 				return states.ladder
 			if parent.is_on_floor():
 				return states.idle
@@ -67,7 +67,7 @@ func _get_transition(delta):
 				return states.damage
 			if parent.is_back:
 				return states.back
-			if parent.is_on_ladder:
+			if parent.is_climbing_up or parent.is_climbing_down:
 				return states.ladder
 			if parent.is_on_floor():
 				return states.idle
@@ -79,10 +79,10 @@ func _get_transition(delta):
 		states.back:
 			if not parent.is_back:
 				return states.idle
-			if parent.is_on_ladder:
+			if parent.is_climbing_up or parent.is_climbing_down:
 				return states.ladder
 		states.ladder:
-			if not parent.is_on_ladder:
+			if not parent.is_on_ladder or parent.is_on_floor():
 				return states.idle
 
 	return null
@@ -106,6 +106,8 @@ func _enter_state(new_state, old_state):
 			parent.anim_player.play("back")
 		states.ladder:
 			parent.anim_player.play("back")
+
+				
 
 
 func _exit_state(old_state, new_state):

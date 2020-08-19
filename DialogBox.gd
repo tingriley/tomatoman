@@ -11,10 +11,10 @@ func _ready():
 
 
 func _process(delta):
-	
 	$"next-indicator".visible = finished
 	if Input.is_action_just_pressed("ui_down"):
-		load_dialog()
+		if visible:
+			load_dialog()
 
 func load_dialog():
 	if dialog_index < dialog.size():
@@ -33,3 +33,6 @@ func load_dialog():
 
 func _on_Tween_tween_completed(object, key):
 	finished = true
+
+
+

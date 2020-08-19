@@ -20,6 +20,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 32, 32 )
 shape = SubResource( 1 )
+disabled = true
 one_way_collision = true
 
 [node name="Sprite" type="Sprite" parent="."]

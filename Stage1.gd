@@ -26,3 +26,22 @@ func _process(delta):
 	if $Player.position.x <= 0 and Input.is_action_pressed("ui_left"):
 		yield(get_tree().create_timer(0.5), "timeout")
 		get_tree().change_scene(left_stage)
+
+
+func _on_LabBlockTimer1_timeout():
+	$LabGroup.animate_children()
+
+
+func _on_LabBlockTimer2_timeout():
+	$LabGroup2.animate_children()
+
+
+func _on_LabBlockTimer3_timeout():
+	$LabGroup3.animate_children()
+
+
+func _on_LabBlockTimer4_timeout():
+	$LabGroup4.animate_children()
+
+func _on_LabBlockTimer5_timeout():
+	$LabGroup5.animate_children_right()

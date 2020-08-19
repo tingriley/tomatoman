@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Stage4.gd" type="Script" id=1]
 [ext_resource path="res://Decoration/candy1.png" type="Texture" id=2]
@@ -8,12 +8,13 @@
 [ext_resource path="res://CandytTile.tres" type="TileSet" id=6]
 [ext_resource path="res://Background/bg_pink.png" type="Texture" id=7]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://GreenKey.tscn" type="PackedScene" id=9]
-[ext_resource path="res://LaserBeam.tscn" type="PackedScene" id=10]
+[ext_resource path="res://LabBlock.tscn" type="PackedScene" id=10]
+[ext_resource path="res://LabGroup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://GroundEnemy.tscn" type="PackedScene" id=12]
 
 [node name="Stage4" type="Node2D"]
 script = ExtResource( 1 )
-right_stage = "res://Stage2.tscn"
+right_stage = "res://Stage5.tscn"
 
 [node name="candy1" type="Sprite" parent="."]
 position = Vector2( 944.348, 594.053 )
@@ -52,7 +53,7 @@ texture = ExtResource( 5 )
 tile_set = ExtResource( 6 )
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( 0, -1073741788, 0, 1, -1073741788, 0, 2, -1073741788, 0, 3, -1073741788, 0, 4, -1073741788, 0, 5, -1073741788, 0, 6, -1073741788, 0, 7, -1073741788, 0, 8, -1073741788, 0, 9, -1073741788, 0, 10, -1073741788, 0, 11, -1073741788, 0, 12, -1073741788, 0, 13, -1073741788, 0, 14, -1073741788, 0, 15, -1073741788, 0, 16, -1073741788, 0, 17, -1073741788, 0, 65536, 36, 0, 65553, 36, 0, 131072, 36, 0, 131089, 36, 0, 196608, 36, 0, 196621, 12, 0, 196625, 36, 0, 262144, 36, 0, 262147, 12, 0, 262161, 36, 0, 327680, 36, 0, 327686, 13, 0, 327687, 17, 0, 327697, 36, 0, 393216, 36, 0, 393226, 12, 0, 393233, 36, 0, 458752, 36, 0, 458765, 12, 0, 458769, 36, 0, 524288, 36, 0, 524305, 36, 0, 589824, 36, 0, 655360, 2, 0, 655361, 2, 0, 655362, 2, 0, 655363, 2, 0, 655364, 2, 0, 655365, 2, 0, 655366, 2, 0, 655367, 2, 0, 655368, 2, 0, 655369, 2, 0, 655370, 2, 0, 655371, 2, 0, 655372, 2, 0, 655373, 2, 0, 655374, 2, 0, 655375, 2, 0, 655376, 2, 0, 655377, 2, 0, 720896, 6, 0, 720897, 6, 0, 720898, 6, 0, 720899, 6, 0, 720900, 6, 0, 720901, 6, 0, 720902, 6, 0, 720903, 6, 0, 720904, 6, 0, 720905, 6, 0, 720906, 6, 0, 720907, 6, 0, 720908, 6, 0, 720909, 6, 0, 720910, 6, 0, 720911, 6, 0, 720912, 6, 0, 720913, 6, 0 )
+tile_data = PoolIntArray( 0, -1073741788, 0, 1, -1073741788, 0, 2, -1073741788, 0, 3, -1073741788, 0, 4, -1073741788, 0, 5, -1073741788, 0, 6, -1073741788, 0, 7, -1073741788, 0, 8, -1073741788, 0, 9, -1073741788, 0, 10, -1073741788, 0, 11, -1073741788, 0, 12, -1073741788, 0, 13, -1073741788, 0, 14, -1073741788, 0, 15, -1073741788, 0, 16, -1073741788, 0, 17, -1073741788, 0, 65536, 36, 0, 65553, 36, 0, 131072, 36, 0, 131089, 36, 0, 196608, 36, 0, 196625, 36, 0, 262144, 36, 0, 262147, 12, 0, 262161, 36, 0, 327680, 36, 0, 327686, 13, 0, 327687, 17, 0, 327697, 36, 0, 393216, 36, 0, 393226, 12, 0, 393233, 36, 0, 458752, 36, 0, 458765, 12, 0, 458769, 36, 0, 524288, 36, 0, 524305, 36, 0, 589824, 36, 0, 655360, 2, 0, 655361, 2, 0, 655362, 2, 0, 655363, 2, 0, 655364, 2, 0, 655365, 2, 0, 655366, 2, 0, 655367, 2, 0, 655368, 2, 0, 655369, 2, 0, 655370, 2, 0, 655371, 2, 0, 655372, 2, 0, 655373, 2, 0, 655374, 2, 0, 655375, 2, 0, 655376, 2, 0, 655377, 2, 0, 720896, 6, 0, 720897, 6, 0, 720898, 6, 0, 720899, 6, 0, 720900, 6, 0, 720901, 6, 0, 720902, 6, 0, 720903, 6, 0, 720904, 6, 0, 720905, 6, 0, 720906, 6, 0, 720907, 6, 0, 720908, 6, 0, 720909, 6, 0, 720910, 6, 0, 720911, 6, 0, 720912, 6, 0, 720913, 6, 0 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -71,9 +72,20 @@ centered = false
 position = Vector2( 1130, 607.303 )
 z_index = 2
 
-[node name="key" parent="." instance=ExtResource( 9 )]
-position = Vector2( 220.693, 186.273 )
-scale = Vector2( 0.7, 0.7 )
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 
-[node name="LaserBeam" parent="." instance=ExtResource( 10 )]
-position = Vector2( 450, 50 )
+[node name="LabGroup" parent="." instance=ExtResource( 11 )]
+
+[node name="LabBlock" parent="LabGroup" instance=ExtResource( 10 )]
+position = Vector2( 424.953, 123.295 )
+
+[node name="GroundEnemy" parent="LabGroup/LabBlock" instance=ExtResource( 12 )]
+position = Vector2( 36.3574, 170.464 )
+
+[node name="LabBlock2" parent="LabGroup" instance=ExtResource( 10 )]
+position = Vector2( 671.508, 123.295 )
+
+[node name="LabBlock3" parent="LabGroup" instance=ExtResource( 10 )]
+position = Vector2( 856, 123.295 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -30,11 +30,11 @@ func _ready():
 		camera_limits_x.append(0)
 	
 	camera_limits_x[0] = 1
-	camera_limits_x[1] = 2
-	camera_limits_x[2] = 2
+	camera_limits_x[1] = 6
+	camera_limits_x[2] = 4
 	camera_limits_x[3] = 1
 	camera_limits_x[4] = 1
-	camera_limits_x[5] = 1
+	camera_limits_x[5] = 2
 	camera_limits_x[6] = 1
 	camera_limits_x[7] = 1
 	

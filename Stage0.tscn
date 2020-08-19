@@ -24,7 +24,6 @@ tile_data = PoolIntArray( 0, 36, 0, 1, 36, 0, 2, 36, 0, 3, 36, 0, 4, 36, 0, 5, 3
 [node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground"]
-scale = Vector2( 0.993099, 1 )
 z_index = 100
 texture = ExtResource( 3 )
 centered = false

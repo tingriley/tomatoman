@@ -1,11 +1,19 @@
 extends Node2D
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func _process(delta):
 	get_parent().get_node("Player").is_on_ladder = is_on_ladder()
+	get_parent().get_node("Player").can_climb_down = can_climb_down()
 
+
+func can_climb_down():
+	for child in get_children():
+		if "Top" in child.name:
+			if child.can_climb_down():
+				return true
+	return false
 
 func is_on_ladder():
 	for child in get_children():

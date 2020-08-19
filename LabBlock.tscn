@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/lab_block1.png" type="Texture" id=1]
+[ext_resource path="res://Assets/lab_block2.png" type="Texture" id=2]
+[ext_resource path="res://LabBlock.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "fire",
+"speed": 5.0
+} ]
+
+[node name="LabBlock" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "fire"
+
+[node name="Position2D" type="Position2D" parent="."]

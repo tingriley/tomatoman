@@ -75,8 +75,8 @@ func dead():
 		$CanvasLayer/HealthBar._on_health_updated(global.hp*10, 0)
 		$CanvasLayer/Label.text = str(global.hp)
 		is_damage = true
-		yield(get_tree().create_timer(1), "timeout")
-		is_damage = false
+		$DamageTimer.start()
+
 	if global.hp <= 0:
 		is_dead = true 
 		$AnimatedSprite.play("dead")
@@ -140,7 +140,7 @@ func _physics_process(delta):
 	$CanvasLayer/HealthBar._on_health_updated(global.hp*10, 0)
 	$CanvasLayer/Label.text = str(global.hp)
 	
-	
+
 	
 	if not is_dead:
 		if global.gun_found:
@@ -174,6 +174,7 @@ func _physics_process(delta):
 			if is_on_ladder:
 				is_climbing_up = true
 				is_climbing_down = false
+				
 			is_up = true
 		else:
 			is_up = false
@@ -211,6 +212,7 @@ func _physics_process(delta):
 		
 		if is_climbing_down:
 			get_parent().get_node("Ladders").disable_collision()
+
 			if not is_tween_to_center:
 				tween_to_ladder_center()
 				is_tween_to_center = true
@@ -223,23 +225,28 @@ func _physics_process(delta):
 					tween_to_ladder_center()
 					is_tween_to_center = true
 				velocity.y = -150
+	
 			elif is_climbing_down:
-				get_parent().get_node("Ladders").disable_collision()
 				if not is_tween_to_center:
 					tween_to_ladder_center()
 					is_tween_to_center = true
 				velocity.y = 150
 			else:
-				velocity.y = 0
+				velocity.y += gravity * delta
 		else:
 			velocity.y += gravity * delta
 			is_climbing_up = false
 			is_climbing_down = false
 			is_tween_to_center = false
+			if(get_parent().get_node("Ladders")):
+				get_parent().get_node("Ladders").enable_collision()
 		
-		if not is_on_ladder:
+		if not is_on_ladder or is_on_floor():
 			is_climbing_up = false
 			is_climbing_down = false
+
+
+	
 
 		
 		velocity = move_and_slide(velocity, FLOOR)
@@ -253,5 +260,7 @@ func _on_ShootTimer_timeout():
 	is_shooting = false
 
 
-func _on_Timer_timeout():
+
+
+func _on_DamageTimer_timeout():
 	is_damage = false

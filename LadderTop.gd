@@ -19,14 +19,10 @@ func _on_Area2D_body_exited(body):
 func can_climb_down():
 	var collider = $RayCast2D.get_collider()
 
-
 	if collider and "Player" in collider.name:
 		return true
 	
 	return false
 	
 
-
-func _process(delta):
-	get_parent().get_parent().get_node("Player").can_climb_down = can_climb_down()
 
