@@ -13,7 +13,7 @@ func _ready():
 	camera.limit_right = global.camera_limits_x[4] * global.SIZE_X
 	global.current_stage = 4
 
-	if 	global.prev_stage ==2:
+	if 	global.prev_stage == 3:
 		player.position.x = camera.limit_right -32
 		player.position.y = 607
 		animation.flip_h = true

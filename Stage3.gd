@@ -14,12 +14,18 @@ func update_alpha():
 
 func _ready():
 	set_modulate(Color(1,1,1,alpha))
-	$Player/Camera2D.limit_right = global.camera_limits_x[5] * global.SIZE_X
+	$Player/Camera2D.limit_right = global.camera_limits_x[3] * global.SIZE_X
 	global.current_stage = 3
 	
 	if 	global.prev_stage == 4:
 		$Player.position.x = 32
 		$Player.position.y = 607
+
+	if 	global.prev_stage == 5:
+		$Player.position.x = $Player/Camera2D.limit_right-32
+		$Player.position.y = 607
+		$Player.flip_player_to_left()
+		$BlueGiant.queue_free()
 
 	
 func _process(delta):

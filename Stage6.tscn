@@ -10,6 +10,7 @@
 
 [node name="Stage6" type="Node2D"]
 script = ExtResource( 1 )
+right_stage = "res://StageBoss.tscn"
 up_stage = "res://Stage7.tscn"
 up_stage2 = "res://Stage9.tscn"
 

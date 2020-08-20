@@ -14,6 +14,6 @@ func _process(delta):
 	var count = 0
 	var ch = get_children()
 	for c in ch:
-		if "Giant" in c.name:
+		if "Snow" in c.name:
 			count += 1
 	children = count

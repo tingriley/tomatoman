@@ -20,7 +20,7 @@ func _ready():
 		$Player/AnimatedSprite.flip_h = true
 	
 func _process(delta):
-	global.prev_stage = 3
+	global.prev_stage = 5
 	if $Player.position.x >= $Player/Camera2D.limit_right and Input.is_action_pressed("ui_right"):
 		yield(get_tree().create_timer(0.5), "timeout")
 		get_tree().change_scene(right_stage)

@@ -5,7 +5,7 @@ const DIALOGBOX = preload("DialogBox.tscn")
 
 
 func load_dialog_box(body):
-	body.get_node("CanvasLayer/DialogBox").visible = true
+	body.get_node("CanvasLayer/DialogBox/").visible = true
 	body.get_node("CanvasLayer/DialogBox/DialogBox").dialog[0] = '\n\t\t\tYou found a key. (Press DOWN to continue)'
 	body.get_node("CanvasLayer/DialogBox/DialogBox").load_dialog()
 

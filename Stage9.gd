@@ -14,14 +14,23 @@ func update_alpha():
 
 func _ready():
 	set_modulate(Color(1,1,1,alpha))
-	$Player/Camera2D.limit_right = global.camera_limits_x[5] * global.SIZE_X
+	$Player/Camera2D.limit_right = global.camera_limits_x[9] * global.SIZE_X
 	global.current_stage = 9
 	
+		
+	if global.prev_stage == 10:
+		$Block.queue_free()
+		$Block2.queue_free()
+		block_clear = true
+		init_climb_up = false
+		$Player.position.x = 1120
+		$Player.position.y = 224
+		$Giants.queue_free()
 
 	
 	
 func _process(delta):
-	if $Giants.get_num_childern() == 0:
+	if $Giants and $Giants.get_num_childern() == 0:
 		if not block_clear:
 			block_clear = true
 			$Block/AnimatedSprite.play("open")

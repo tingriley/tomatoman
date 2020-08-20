@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Snowman.gd" type="Script" id=1]
+[ext_resource path="res://SmallSnowman.gd" type="Script" id=1]
 [ext_resource path="res://Assets/snowman1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/snowman2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/snowman3.png" type="Texture" id=4]
@@ -43,7 +43,7 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[node name="Snowman" type="KinematicBody2D"]
+[node name="SmallSnowman" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
 
@@ -56,16 +56,9 @@ animation = "die"
 frame = 3
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.5
+autostart = true
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 50, 12 )
-
-[node name="PlayerPositionTimer" type="Timer" parent="."]
-autostart = true
-
-[node name="WalkTimer" type="Timer" parent="."]
-wait_time = 6.0
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="PlayerPositionTimer" to="." method="_on_PlayerPositionTimer_timeout"]
-[connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]

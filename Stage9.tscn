@@ -5,7 +5,7 @@
 [ext_resource path="res://Background/bg_pink.png" type="Texture" id=3]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Giants.gd" type="Script" id=5]
-[ext_resource path="res://BlueGiant.tscn" type="PackedScene" id=6]
+[ext_resource path="res://SmallSnowman.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Block.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ladders.tscn" type="PackedScene" id=8]
 [ext_resource path="res://LadderTop.tscn" type="PackedScene" id=9]
@@ -36,23 +36,22 @@ texture = ExtResource( 3 )
 centered = false
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 800, 607.047 )
+position = Vector2( 799.385, 604.339 )
 z_index = 2
 
 [node name="Giants" type="Node2D" parent="."]
 position = Vector2( 1120, 160 )
 script = ExtResource( 5 )
 
-[node name="BlueGiant" parent="Giants" groups=[
-"Giants",
-] instance=ExtResource( 6 )]
-position = Vector2( -699.764, 427.607 )
+[node name="SmallSnowman" parent="Giants" instance=ExtResource( 6 )]
+position = Vector2( -605.218, 235.181 )
+hp = 10
+direction = -1
 
-[node name="BlueGiant2" parent="Giants" groups=[
-"Giants",
-] instance=ExtResource( 6 )]
-position = Vector2( -352, 40.904 )
-facing = -1
+[node name="SmallSnowman2" parent="Giants" instance=ExtResource( 6 )]
+position = Vector2( -188.176, 32 )
+hp = 10
+direction = -1
 
 [node name="Block" parent="." instance=ExtResource( 7 )]
 position = Vector2( 1120, 224 )

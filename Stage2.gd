@@ -7,7 +7,7 @@ onready var camera = $Player/Camera2D
 export(String, FILE, "*.tscn") var right_stage
 export(String, FILE, "*.tscn") var left_stage
 export(String, FILE, "*.tscn") var up_stage
-
+var init_climb_down = false
 
 var alpha = 0
 
@@ -16,12 +16,15 @@ func _ready():
 	camera.limit_right = global.camera_limits_x[2] * global.SIZE_X
 	global.current_stage = 2
 	
-
-	
-	if 	global.prev_stage == 3:
+	if 	global.prev_stage == 6:
 		player.position.x = camera.limit_right-32
 		player.position.y = 607
-		player.flip_player_to_left()
+		player.flip_player_to_left()	
+	if 	global.prev_stage == 3:
+		player.position.x = 2272
+		player.position.y = 0
+		player.is_climbing_down = true
+		init_climb_down = true
 
 	
 	if global.blue_giant1_defeated:
@@ -35,7 +38,13 @@ func _process(delta):
 	set_modulate(Color(1,1,1,alpha))
 	if alpha < 1:
 		alpha += 0.05
-		
+	
+	if init_climb_down:
+		player.is_climbing_down = true
+	
+	if not player.is_on_ladder:
+		init_climb_down = false
+	
 	global.prev_stage = 2
 	if player.position.x >= camera.limit_right and Input.is_action_pressed("ui_right") and player.position.y >= 600:
 		yield(get_tree().create_timer(0.5), "timeout")

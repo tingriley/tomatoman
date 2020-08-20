@@ -14,15 +14,15 @@ func update_alpha():
 
 func _ready():
 	set_modulate(Color(1,1,1,alpha))
-	$Player/Camera2D.limit_right = global.camera_limits_x[5] * global.SIZE_X
-	global.current_stage = 9
+	$Player/Camera2D.limit_right = global.camera_limits_x[8] * global.SIZE_X
+	global.current_stage = 8
 	
 	
 func _process(delta):
 	update_alpha()
 	if init_climb_up:
 		$Player.is_climbing_up = true
-	global.prev_stage = 9
+	global.prev_stage = 8
 	if $Player.position.x >= $Player/Camera2D.limit_right:
 		yield(get_tree().create_timer(0.5), "timeout")
 		get_tree().change_scene(right_stage)

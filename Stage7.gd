@@ -14,10 +14,10 @@ func update_alpha():
 
 func _ready():
 	set_modulate(Color(1,1,1,alpha))
-	$Player/Camera2D.limit_right = global.camera_limits_x[5] * global.SIZE_X
+	$Player/Camera2D.limit_right = global.camera_limits_x[7] * global.SIZE_X
 	global.current_stage = 7
 	
-	if global.prev_stage == 9:
+	if global.prev_stage == 8:
 		$Block.queue_free()
 		$Block2.queue_free()
 		block_clear = true
