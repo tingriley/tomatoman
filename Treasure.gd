@@ -10,6 +10,8 @@ var is_entered = false
 
 func _on_Treasure_body_entered(body):
 	if "Player" in body.name:
+		if not $AudioStreamPlayer2D.playing:
+			$AudioStreamPlayer2D.play()
 		$AnimatedSprite.play('open')
 		player = body
 		if not is_entered:

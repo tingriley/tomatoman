@@ -1,54 +1,83 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Stage0.gd" type="Script" id=1]
-[ext_resource path="res://CandytTile.tres" type="TileSet" id=2]
-[ext_resource path="res://Background/bg_pink.png" type="Texture" id=3]
-[ext_resource path="res://Decoration/Chandelier.png" type="Texture" id=4]
-[ext_resource path="res://Decoration/picture3.png" type="Texture" id=5]
-[ext_resource path="res://Decoration/picture2.png" type="Texture" id=6]
-[ext_resource path="res://Decoration/table.png" type="Texture" id=7]
-[ext_resource path="res://Decoration/sofa.png" type="Texture" id=8]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=9]
+[ext_resource path="res://WinterTile.tres" type="TileSet" id=2]
+[ext_resource path="res://gun.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Background/bg_pink.png" type="Texture" id=4]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Treasure.tscn" type="PackedScene" id=6]
+[ext_resource path="res://GroundEnemy.tscn" type="PackedScene" id=12]
 
 [node name="Stage0" type="Node2D"]
 script = ExtResource( 1 )
-right_stage = "res://Stage1.tscn"
+left_stage = "res://Stage1.tscn"
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
+collision_mask = 7
 format = 1
-tile_data = PoolIntArray( 0, 36, 0, 1, 36, 0, 2, 36, 0, 3, 36, 0, 4, 36, 0, 5, 36, 0, 6, 36, 0, 7, 36, 0, 8, 36, 0, 9, 36, 0, 10, 36, 0, 11, 36, 0, 12, 36, 0, 13, 36, 0, 14, 36, 0, 15, 36, 0, 16, 36, 0, 17, 36, 0, 65536, 36, 0, 65537, 36, 0, 65538, 36, 0, 65539, 36, 0, 65540, 36, 0, 65541, 36, 0, 65542, 36, 0, 65543, 36, 0, 65544, 36, 0, 65545, 36, 0, 65546, 36, 0, 65547, 36, 0, 65548, 36, 0, 65549, 36, 0, 65550, 36, 0, 65551, 36, 0, 65552, 36, 0, 65553, 36, 0, 131072, 36, 0, 131073, 36, 0, 131074, 36, 0, 131075, 36, 0, 131076, 36, 0, 131077, 36, 0, 131078, 36, 0, 131079, 36, 0, 131080, 36, 0, 131081, 36, 0, 131082, 36, 0, 131083, 36, 0, 131084, 36, 0, 131085, 36, 0, 131086, 36, 0, 131087, 36, 0, 131088, 36, 0, 131089, 36, 0, 589824, 2, 0, 589825, 2, 0, 589826, 2, 0, 589827, 2, 0, 589828, 2, 0, 589829, 2, 0, 655360, 6, 0, 655361, 6, 0, 655362, 6, 0, 655363, 6, 0, 655364, 6, 0, 655365, 6, 0, 655366, 2, 0, 655367, 2, 0, 655368, 2, 0, 655369, 2, 0, 655370, 2, 0, 655371, 2, 0, 655372, 2, 0, 655373, 2, 0, 655374, 2, 0, 655375, 2, 0, 655376, 2, 0, 655377, 2, 0, 720896, 6, 0, 720897, 6, 0, 720898, 6, 0, 720899, 6, 0, 720900, 6, 0, 720901, 6, 0, 720902, 6, 0, 720903, 6, 0, 720904, 6, 0, 720905, 6, 0, 720906, 6, 0, 720907, 6, 0, 720908, 6, 0, 720909, 6, 0, 720910, 6, 0, 720911, 6, 0, 720912, 6, 0, 720913, 6, 0 )
+tile_data = PoolIntArray( 196702, 6, 0, 196703, 6, 0, 196704, 6, 0, 196709, 16, 0, 196710, 17, 0, 196711, 18, 0, 262206, 16, 0, 262207, 17, 0, 262208, 17, 0, 262209, 17, 0, 262210, 17, 0, 262211, 17, 0, 262212, 18, 0, 262238, 6, 0, 327774, 6, 0, 393262, 16, 0, 393263, 17, 0, 393264, 17, 0, 393265, 17, 0, 393266, 17, 0, 393267, 17, 0, 393287, 4, 0, 393288, 4, 0, 393307, 6, 0, 393308, 6, 0, 393309, 6, 0, 393310, 6, 0, 393314, 1, 0, 393315, 1, 0, 393316, 1, 0, 458758, 4, 0, 458759, 4, 0, 458795, 4, 0, 458811, 4, 0, 458850, 6, 0, 458851, 6, 0, 458852, 6, 0, 524293, 4, 0, 524294, 4, 0, 524295, 4, 0, 524296, 4, 0, 524330, 4, 0, 524331, 4, 0, 524342, 16, 0, 524343, 17, 0, 524344, 18, 0, 524363, 16, 0, 524364, 17, 0, 524365, 17, 0, 524366, 18, 0, 524386, 6, 0, 524387, 6, 0, 524388, 6, 0, 524389, 6, 0, 524390, 6, 0, 524391, 6, 0, 589828, 4, 0, 589829, 4, 0, 589830, 4, 0, 589831, 4, 0, 589832, 4, 0, 589833, 4, 0, 589845, 9, 0, 589852, 9, 0, 589865, 4, 0, 589866, 4, 0, 589908, 6, 0, 589909, 6, 0, 589922, 6, 0, 589923, 6, 0, 589924, 6, 0, 589925, 6, 0, 589926, 6, 0, 589927, 6, 0, 655363, 4, 0, 655364, 4, 0, 655365, 4, 0, 655366, 4, 0, 655367, 4, 0, 655368, 4, 0, 655369, 4, 0, 655370, 4, 0, 655381, 16, 0, 655382, 17, 0, 655383, 17, 0, 655384, 17, 0, 655385, 17, 0, 655386, 17, 0, 655387, 17, 0, 655388, 18, 0, 655400, 4, 0, 655401, 4, 0, 655421, 16, 0, 655422, 17, 0, 655423, 17, 0, 655424, 17, 0, 655425, 17, 0, 655426, 17, 0, 655427, 17, 0, 655428, 17, 0, 655429, 18, 0, 655442, 6, 0, 655443, 6, 0, 655444, 6, 0, 655445, 6, 0, 655458, 6, 0, 655459, 6, 0, 655460, 6, 0, 655461, 6, 0, 655462, 6, 0, 655463, 6, 0, 720896, 4, 0, 720897, 4, 0, 720898, 4, 0, 720899, 4, 0, 720900, 4, 0, 720901, 4, 0, 720902, 4, 0, 720903, 4, 0, 720904, 4, 0, 720905, 4, 0, 720906, 4, 0, 720907, 4, 0, 720911, 6, 0, 720912, 6, 0, 720913, 6, 0, 720927, 4, 0, 720928, 4, 0, 720929, 4, 0, 720930, 4, 0, 720931, 4, 0, 720932, 4, 0, 720978, 6, 0, 720979, 6, 0, 720980, 6, 0, 720981, 6, 0, 720982, 6, 0, 720983, 6, 0, 720984, 6, 0, 720985, 6, 0 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
 
-[node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_mirroring = Vector2( 1152, 768 )
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+modulate = Color( 0.0980392, 0.0666667, 0.0392157, 1 )
 z_index = 100
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 centered = false
 
-[node name="Chandelier" type="Sprite" parent="."]
-position = Vector2( 592.655, 240 )
-texture = ExtResource( 4 )
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 6565.7, 146.644 )
+z_index = 2
 
-[node name="picture3" type="Sprite" parent="."]
-position = Vector2( 340, 300 )
-z_index = 1
-texture = ExtResource( 5 )
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 
-[node name="picture2" type="Sprite" parent="."]
-position = Vector2( 845, 300 )
-texture = ExtResource( 6 )
+[node name="GroundEnemy14" parent="." instance=ExtResource( 12 )]
+position = Vector2( 3546.91, 462.616 )
+speed = 95
 
-[node name="table" type="Sprite" parent="."]
-position = Vector2( 503.201, 618.242 )
-z_index = -1
-texture = ExtResource( 7 )
+[node name="GroundEnemy21" parent="." instance=ExtResource( 12 )]
+position = Vector2( 2202.37, 674.28 )
+speed = 95
 
-[node name="sofa" type="Sprite" parent="."]
-position = Vector2( 929.35, 602.299 )
-texture = ExtResource( 8 )
+[node name="GroundEnemy22" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1723.03, 601.918 )
+speed = 95
 
-[node name="Player" parent="." instance=ExtResource( 9 )]
-position = Vector2( 189.602, 544.432 )
+[node name="GroundEnemy23" parent="." instance=ExtResource( 12 )]
+position = Vector2( 444.161, 404.602 )
+speed = 95
+
+[node name="GroundEnemy15" parent="." instance=ExtResource( 12 )]
+position = Vector2( 5616.88, 674.28 )
+speed = 95
+
+[node name="GroundEnemy19" parent="." instance=ExtResource( 12 )]
+position = Vector2( 6371.18, 344.481 )
+speed = 95
+
+[node name="GroundEnemy20" parent="." instance=ExtResource( 12 )]
+position = Vector2( 6143.26, 150.759 )
+speed = 95
+
+[node name="GroundEnemy17" parent="." instance=ExtResource( 12 )]
+position = Vector2( 4179.39, 601.918 )
+speed = 95
+
+[node name="GroundEnemy18" parent="." instance=ExtResource( 12 )]
+position = Vector2( 4912.17, 462.616 )
+speed = 95
+
+[node name="gun" parent="." instance=ExtResource( 3 )]
+position = Vector2( 5445.26, 550.715 )
+
+[node name="Treasure2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4159.87, 206.239 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

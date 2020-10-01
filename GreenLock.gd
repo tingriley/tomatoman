@@ -14,5 +14,5 @@ func _on_GreenLock_body_entered(body):
 		if global.green_key_found:
 			global.green_lock_open = true
 			$KinematicBody2D/AnimatedSprite.play("open")
-			yield(get_tree().create_timer(1), "timeout")
+			yield(get_tree().create_timer(2.5), "timeout")
 			queue_free()

@@ -11,6 +11,8 @@ func _ready():
 	add_state("damage")
 	add_state("back")
 	add_state("ladder")
+	add_state("drift")
+	add_state("fast")
 	state = states.idle
 	
 
@@ -36,7 +38,10 @@ func _get_transition(delta):
 				if parent.velocity.y > 0 :
 					return states.fall
 			if parent.velocity.x != 0:
-				return states.run
+				if parent.is_fast:
+					return states.fast
+				else:
+					return states.run
 		states.run:
 			if parent.is_damage:
 				return states.damage
@@ -51,11 +56,18 @@ func _get_transition(delta):
 					return states.fall
 			if parent.velocity.x == 0:
 				return states.idle
+			if parent.velocity.x != 0:
+				if parent.is_fast:
+					return states.fast
+				else:
+					return states.run
 		states.jump:
 			if parent.is_damage:
 				return states.damage
 			if parent.is_back:
 				return states.back
+			if parent.is_drift:
+				return states.drift
 			if parent.is_climbing_up or parent.is_climbing_down:
 				return states.ladder
 			if parent.is_on_floor():
@@ -67,6 +79,8 @@ func _get_transition(delta):
 				return states.damage
 			if parent.is_back:
 				return states.back
+			if parent.is_drift:
+				return states.drift
 			if parent.is_climbing_up or parent.is_climbing_down:
 				return states.ladder
 			if parent.is_on_floor():
@@ -84,6 +98,13 @@ func _get_transition(delta):
 		states.ladder:
 			if not parent.is_on_ladder or parent.is_on_floor():
 				return states.idle
+		states.drift:
+			if not parent.is_drift:
+				return states.idle
+		states.fast:
+			if not parent.is_fast:
+				return states.idle
+
 
 	return null
 
@@ -97,7 +118,7 @@ func _enter_state(new_state, old_state):
 		states.jump:
 			parent.anim_player.play("jump")        
 		states.fall:
-			parent.anim_player.play("fall")
+			parent.anim_player.play("jump")
 		states.dead:
 			parent.anim_player.play("dead")
 		states.damage:
@@ -106,6 +127,10 @@ func _enter_state(new_state, old_state):
 			parent.anim_player.play("back")
 		states.ladder:
 			parent.anim_player.play("back")
+		states.drift:
+			parent.anim_player.play("drift")		
+		states.fast:
+			parent.anim_player.play("fast")
 
 				
 

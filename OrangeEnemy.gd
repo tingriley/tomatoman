@@ -3,6 +3,7 @@ extends KinematicBody2D
 const GRAVITY = 20
 const FLOOR = Vector2(0, -1)
 const LASER = preload("LaserOrange.tscn")
+const HEART = preload("heart.tscn")
 const SPEED = 350
 const SCORE = 100
 
@@ -28,20 +29,40 @@ func _ready():
 	is_shooting = true
 	$Timer.start()
 
+func shoot():
+	var laser = null
+	laser = LASER.instance()
+	get_parent().add_child(laser)
+	laser.set_speed(Vector2(SPEED*direction, 0))
+	laser.global_position = $Position2D.global_position
 
+
+func add_heart():
+	var heart = null
+	heart = HEART.instance()
+	get_parent().add_child(heart)
+	heart.global_position = $Position2D.global_position - Vector2(0, 64)
+	
 	
 func dead(damage):
 	if not $dead.playing:
 		$dead.play()
 	hp -= damage 
+	$Label.visible = true
+	$Label.text = str(hp)
+	$TextTimer.start()
 	if hp <= 0:
-		global.score += SCORE
-		is_dead = true
-		$AnimatedSprite.play("dead")
-		$CollisionShape2D.set_deferred("disabled", true) 
-		
-		if scale > Vector2(1, 1):
-			get_parent().get_node("ScreenShake").screen_shake(1, 10, 100)
+		if not is_dead:
+			is_dead = true
+			if rand_range(0, 1.0) >= 0.5:
+				add_heart()
+			global.score += SCORE
+			$Timer2.start()
+			$AnimatedSprite.play("dead")
+			$CollisionShape2D.set_deferred("disabled", true) 
+			
+			if scale > Vector2(1, 1):
+				get_parent().get_node("ScreenShake").screen_shake(1, 10, 100)
 			
 
 func _physics_process(delta):
@@ -58,12 +79,10 @@ func _physics_process(delta):
 			$AnimatedSprite.flip_h = true
 		else:
 			$AnimatedSprite.flip_h = false
-		$AnimatedSprite.play("walk")
+		$AnimatedSprite.play("idle")
 	
 		velocity.y += GRAVITY
-		
 		velocity = move_and_slide(velocity, FLOOR)
-
 
 	else:
 		if is_on_floor():
@@ -75,26 +94,16 @@ func _physics_process(delta):
 		direction *= -1
 		$RayCast2D.position.x *= -1
 		$Position2D.position.x *= -1
-	
-	if $RayCast2D.is_colliding() == false:  # need to move the raycast
-		direction *= -1
-		$RayCast2D.position.x *= -1
-		$Position2D.position.x *= -1
-
-
-func shoot():
-	var laser = null
-	laser = LASER.instance()
-	get_parent().add_child(laser)
-	laser.set_speed(Vector2(SPEED*direction, 0))
-	laser.global_position = $Position2D.global_position
-
+	if is_on_floor():
+		if $RayCast2D.is_colliding() == false:  # need to move the raycast
+			direction *= -1
+			$RayCast2D.position.x *= -1
+			$Position2D.position.x *= -1
 
 func _on_Area2D_body_entered(body):
 	if not is_dead:
 		if "Player" in body.name:
 			body.dead()
-
 
 func _on_Timer_timeout():
 	if is_shooting:
@@ -103,9 +112,17 @@ func _on_Timer_timeout():
 			$StopTimer.start()
 			is_stoptimer_start = true
 
-
 func _on_StopTimer_timeout():
 	is_shooting = false
 	yield(get_tree().create_timer(2.5), "timeout")
 	is_shooting = true
+	$AnimatedSprite.play("shoot")
 	is_stoptimer_start = false
+
+
+func _on_TextTimer_timeout():
+	$Label.visible = false
+
+
+func _on_Timer2_timeout():
+	queue_free()

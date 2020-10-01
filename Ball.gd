@@ -18,7 +18,6 @@ func set_speed(s):
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, FLOOR)
-	#velocity.y += 10
 	if is_on_floor():
 		velocity.x = 0
 	if is_on_wall():

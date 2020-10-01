@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-smiley-island-short.wav-cc0d8689d91736e5966788b0e882e091.sample"
+
+[deps]
+
+source_file="res://music/POL-smiley-island-short.wav"
+dest_files=[ "res://.import/POL-smiley-island-short.wav-cc0d8689d91736e5966788b0e882e091.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

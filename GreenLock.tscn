@@ -1,29 +1,31 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://GreenLock.gd" type="Script" id=1]
-[ext_resource path="res://Assets/lock_green.png" type="Texture" id=2]
-[ext_resource path="res://Assets/lock_green1.png" type="Texture" id=3]
-[ext_resource path="res://Assets/lock_green2.png" type="Texture" id=4]
-[ext_resource path="res://Assets/lock_green3.png" type="Texture" id=5]
-[ext_resource path="res://Assets/lock_green4.png" type="Texture" id=6]
+[ext_resource path="res://Assets/green_door4.png" type="Texture" id=2]
+[ext_resource path="res://Assets/green_door7.png" type="Texture" id=3]
+[ext_resource path="res://Assets/green_door.png" type="Texture" id=4]
+[ext_resource path="res://Assets/green_door6.png" type="Texture" id=5]
+[ext_resource path="res://Assets/green_door2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/green_door5.png" type="Texture" id=7]
+[ext_resource path="res://Assets/green_door3.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 64, 32 )
+extents = Vector2( 128, 64 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32, 32 )
+extents = Vector2( 64, 64 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
-"loop": true,
+"frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": false,
 "name": "open",
-"speed": 4.0
+"speed": 3.0
 } ]
 
 [node name="GreenLock" type="Area2D"]

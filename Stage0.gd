@@ -1,22 +1,54 @@
 extends Node2D
 
 onready var global = get_node("/root/Global")
+onready var music = get_node("/root/Music")
+
+
+export(String, FILE, "*.tscn") var left_stage
 export(String, FILE, "*.tscn") var right_stage
+
+
+var init_climb_down = false
 var alpha = 0
 
-func _ready():
-	set_modulate(Color(1,1,1,alpha))
-	global.current_stage = 0
-	if 	global.prev_stage == 1:
-		$Player.position.x = 1152-32
-		$Player.position.y = 612
-		$Player.flip_player_to_left()
-
-func _process(delta):
-	set_modulate(Color(1,1,1,alpha))
+func update_alpha():
 	if alpha < 1:
 		alpha += 0.05
-	global.prev_stage = 0
+	set_modulate(Color(1,1,1,alpha))
+
+func _ready():
+	music.get_node("AudioStreamPlayer2D").stop()
+	music.get_node("AudioStreamPlayer2D2").play()
+	set_modulate(Color(1,1,1,alpha))
+	$Player/Camera2D.limit_right = global.camera_limits_x[0] * global.SIZE_X
+	global.current_stage = 0
+	
+	if global.prev_stage == 1:
+		$Player.position.x = $Player/Camera2D.limit_left + 32
+		$Player.position.y = $Player/Camera2D.limit_bottom - 64
+	else:
+		$Player.flip_player_to_left()
+
+func change_stage():
 	if $Player.position.x >= $Player/Camera2D.limit_right and Input.is_action_pressed("ui_right"):
-		yield(get_tree().create_timer(0.5), "timeout")
-		get_tree().change_scene(right_stage)
+		yield(get_tree().create_timer(0.35), "timeout")
+		get_tree().change_scene(right_stage)	
+	if $Player.position.x <= $Player/Camera2D.limit_left and Input.is_action_pressed("ui_left"):
+		yield(get_tree().create_timer(0.35), "timeout")
+		get_tree().change_scene(left_stage)	
+	
+func _process(delta):
+	update_alpha()
+		
+	if init_climb_down:
+		$Player.is_climbing_down = true
+	
+
+	global.prev_stage = 0
+
+	change_stage()
+	
+
+
+func _on_Timer_timeout():
+	init_climb_down = false

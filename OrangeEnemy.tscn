@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://OrangeEnemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/orange_enemy1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/orange_enemy2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/orange_enemy_die.png" type="Texture" id=4]
 [ext_resource path="res://Assets/orange_enemy3.png" type="Texture" id=5]
+[ext_resource path="res://Label.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -69,6 +70,20 @@ position = Vector2( -39.8458, 0.681129 )
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
 volume_db = 10.0
 max_distance = 6000.0
+
+[node name="TextTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Label" parent="." instance=ExtResource( 6 )]
+margin_left = -5.0
+margin_top = -50.0
+margin_right = 35.0
+margin_bottom = -19.0
+
+[node name="Timer2" type="Timer" parent="."]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="StopTimer" to="." method="_on_StopTimer_timeout"]
+[connection signal="timeout" from="TextTimer" to="." method="_on_TextTimer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]

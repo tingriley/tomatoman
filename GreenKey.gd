@@ -18,7 +18,9 @@ func _ready():
 
 func _on_GreenKey_body_entered(body):
 	if "Player" in body.name:
-		load_dialog_box(body)
+		body.get_node("CanvasLayer/Control/RichTextLabel").set_code(1)
+		body.get_node("CanvasLayer/Control/Timer").start()
+		
 		global.green_key_found = true
 		if not body.is_powerup:
 			body.is_powerup = true

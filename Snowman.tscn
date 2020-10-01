@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Snowman.gd" type="Script" id=1]
 [ext_resource path="res://Assets/snowman1.png" type="Texture" id=2]
@@ -18,7 +18,7 @@
 [ext_resource path="res://Assets/snowman_die8.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40, 50 )
+extents = Vector2( 34, 50 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -27,15 +27,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
-"loop": false,
-"name": "attack",
-"speed": 50.0
-}, {
 "frames": [ ExtResource( 8 ), ExtResource( 15 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 9 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "die",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": false,
+"name": "attack",
+"speed": 50.0
 }, {
 "frames": [ ExtResource( 3 ), ExtResource( 12 ) ],
 "loop": true,
@@ -43,17 +43,21 @@ animations = [ {
 "speed": 15.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 34, 50 )
+
 [node name="Snowman" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
+hp = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -10, 0 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "die"
-frame = 3
+animation = "attack"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -66,6 +70,20 @@ autostart = true
 
 [node name="WalkTimer" type="Timer" parent="."]
 wait_time = 6.0
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -10, 0 )
+shape = SubResource( 3 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="PlayerPositionTimer" to="." method="_on_PlayerPositionTimer_timeout"]
 [connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]
+[connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

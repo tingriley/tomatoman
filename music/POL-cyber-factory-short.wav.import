@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-cyber-factory-short.wav-3dc54711a362229e21b6ee1a88c07495.sample"
+
+[deps]
+
+source_file="res://music/POL-cyber-factory-short.wav"
+dest_files=[ "res://.import/POL-cyber-factory-short.wav-3dc54711a362229e21b6ee1a88c07495.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

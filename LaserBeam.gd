@@ -5,67 +5,58 @@ const MAX_LENGTH = 2000
 onready var beam = $Beam
 onready var end = $End
 onready var raycast = $RayCast2D
-
-var vector = Vector2(0, 1)
+var r = 0
+var vector = Vector2(1, 1)
 var change_direction = false
-var collision_point
-var direction = 1
-var init_point
-var speed = 550
-var start = false
-var length = 0
+var sum = 0
 
 func _ready():
 
 	beam.rotation = raycast.cast_to.angle()
 	beam.region_rect.end.x = end.position.length()
 
+func set_rotation(rotate):
+	r = rotate
+
+func set_vector(v):
+	vector = v
+
+func change_vector():
+	sum += r
+	if sum >= 0.5 and not change_direction:
+		r *= -1
+		sum = 0
+		change_direction = true
+	if sum <= -0.5 and not change_direction:
+		r *= -1
+		sum = 0
+		change_direction = true
 	
-	var max_cast_to = vector.normalized() * MAX_LENGTH
-	raycast.cast_to = max_cast_to
-	init_point = $Begin.global_position
-
-
-
+	if sum == 0:
+		change_direction = false
+	
+	vector = vector.rotated(PI * r)
 
 func _physics_process(delta):
-	var player = get_parent().get_node("Player")
-	if abs(position.x - player.position.x) <= 60 and player.global_position.y > $Begin.global_position.y:
-		$BlueEnemy/AnimatedSprite.play("attack")
-		yield(get_tree().create_timer(0.1), "timeout")
-		start = true
-	if start:
-		$Beam.visible = true
-		#if collision_point == null:
-		collision_point = raycast.get_collision_point() - Vector2(0, 16)
-		end.global_position.x =  collision_point.x
-	
-		$BlueEnemy.position = end.position
-		
-		length = abs($Begin.position.y - collision_point.y)
-		
-	
-		if end.global_position.y >= collision_point.y:
-			if direction == 1:
-				direction = 0
-				yield(get_tree().create_timer(1.5), "timeout")
-				direction = -1
-		if end.global_position.y < init_point.y:
-			if direction == -1:
-				direction = 0
-				yield(get_tree().create_timer(0.5), "timeout")
-				direction = 1
-				start = false
-	
-		if direction == 1:
-			speed = length*1.1
-		else:
-			speed = length*1.5
-		
-		end.global_position.y += (speed*delta*direction)
-		beam.rotation = raycast.cast_to.angle()
-		beam.region_rect.end.x = end.position.length()
+	var mouse_position = get_local_mouse_position()
+	var max_cast_to = vector.normalized() * MAX_LENGTH
+	raycast.cast_to = max_cast_to
+	change_vector()
+
+
+	if raycast.is_colliding():
+		if "Player" in raycast.get_collider().name:
+			raycast.get_collider().dead()
+		end.global_position = raycast.get_collision_point()
 	else:
-		$Beam.visible = false
-		
+		end.global_position = raycast.cast_to
 	
+	beam.rotation = raycast.cast_to.angle()
+	beam.region_rect.end.x = end.position.length()
+	
+
+
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	pass

@@ -27,7 +27,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -0.104673 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 0.7
 autostart = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

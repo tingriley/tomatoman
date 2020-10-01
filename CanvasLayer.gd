@@ -5,5 +5,5 @@ func _ready():
 	pass
 
 func _process(delta):
-	$Label2.text = str(global.score)
-	$Label3.text = str(global.coin)
+	$Label.text = str(global.hp)
+

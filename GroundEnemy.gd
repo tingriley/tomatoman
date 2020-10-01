@@ -18,12 +18,8 @@ export(Vector2) var size = Vector2(1, 1)
 
 func _ready():
 	scale = size
-		
-		
-	pass # Replace with function body.
 
 
-	
 func dead(damage):
 	hp -= damage 
 
@@ -46,13 +42,10 @@ func _physics_process(delta):
 			$AnimatedSprite.flip_h = true
 		else:
 			$AnimatedSprite.flip_h = false
-		$AnimatedSprite.play("walk")
+		$AnimatedSprite.play("idle")
 	
 		velocity.y += GRAVITY
-		
 		velocity = move_and_slide(velocity, FLOOR)
-
-
 	else:
 		if is_on_floor():
 			velocity = Vector2(120, -400)
@@ -67,10 +60,9 @@ func _physics_process(delta):
 		direction *= -1
 		$RayCast2D.position.x *= -1
 	
-					
+
 func _on_Timer_timeout():
 	queue_free()
-
 
 
 func _on_Area2D_body_entered(body):

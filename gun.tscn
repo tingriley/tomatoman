@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://gun.gd" type="Script" id=1]
 [ext_resource path="res://Assets/gun1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/gun.png" type="Texture" id=3]
 [ext_resource path="res://Assets/gun2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/gun3.png" type="Texture" id=5]
+[ext_resource path="res://music/powerUp7.ogg" type="AudioStream" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -29,4 +30,9 @@ frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+pause_mode = 2
+stream = ExtResource( 6 )
+max_distance = 10000.0
 [connection signal="body_entered" from="." to="." method="_on_gun_body_entered"]

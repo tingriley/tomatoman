@@ -5,22 +5,19 @@ onready var global = get_node("/root/Global")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite.play("idle")
+	if global.gun_found:
+		queue_free()
 
 
-func load_dialog_box(body):
-	body.get_node("CanvasLayer/DialogBox").visible = true
-	body.get_node("CanvasLayer/DialogBox/DialogBox").dialog[0] = '\n\t\t\tYou found a gun. Press X to fire. \n\t\t\t(Press DOWN to continue)'
-	body.get_node("CanvasLayer/DialogBox/DialogBox").load_dialog()
 
 func _on_gun_body_entered(body):
 	print (body.name)
 	if "Player" in body.name:
-		load_dialog_box(body)
-		if not body.is_powerup:
-			global.score += 1000
-			body.is_powerup = true
-			global.gun_found = true
-			visible = false
-			yield(get_tree().create_timer(1.0), "timeout")
-			body.is_powerup = false
-			queue_free()
+		if not $AudioStreamPlayer2D.playing:
+			$AudioStreamPlayer2D.play()
+		global.gun_found = true
+		visible = false
+		body.get_node("CanvasLayer/Control/RichTextLabel").set_code(0)
+		body.get_node("CanvasLayer/Control/Timer").start()
+		yield(get_tree().create_timer(1.0), "timeout")
+		queue_free()

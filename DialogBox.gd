@@ -16,6 +16,8 @@ func _process(delta):
 		if get_parent().visible:
 			load_dialog()
 
+
+
 func load_dialog():
 	if dialog_index < dialog.size():
 		finished = false

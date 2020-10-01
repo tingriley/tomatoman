@@ -33,6 +33,9 @@ func flip():
 
 
 func dead(damage):
+	$Label.visible = true
+	$Label.text = str(hp)
+	$TextTimer.start()	
 	if hp >= 1:
 		$AnimatedSprite.play("damage")
 		hp -= damage
@@ -40,7 +43,7 @@ func dead(damage):
 			yield(get_tree().create_timer(0.7), "timeout")
 			$AnimatedSprite.play("idle")
 		
-		
+
 	if hp <= 0:
 		if not is_dead:
 			is_dead = true
@@ -61,7 +64,6 @@ func shoot():
 func _physics_process(delta):
 
 	if not is_dead:
-	
 		if velocity.y > 0:
 			is_jumping = false
 			
@@ -83,3 +85,6 @@ func _on_Timer_timeout():
 			$AnimatedSprite.play("idle")
 
 
+
+func _on_TextTimer_timeout():
+	$Label.visible = false

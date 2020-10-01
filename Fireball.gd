@@ -33,10 +33,24 @@ func _on_Fireball_body_entered(body):
 	elif "Giant" in body.name:
 		body.dead(1)
 	elif "Snowman" in body.name:
-		body.dead(1)
+		body.dead(1)	
+	elif "Chilly" in body.name:
+		body.dead(1)	
+	elif "Fort" in body.name:
+		body.dead(1)	
+	if "LaserOrange" in body.name:
+		body.queue_free()
+	if "YellowBall" in body.name:
+		body.queue_free()	
+
 	queue_free()
 
 
 func _on_Timer_timeout():
 	queue_free()
 
+
+
+func _on_Fireball_area_entered(area):
+	if "Bird" in area.name:
+		area.dead()
