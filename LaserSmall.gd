@@ -17,10 +17,7 @@ func set_speed(s):
 	velocity = s
 
 func _physics_process(delta):
-
 	velocity = move_and_slide(velocity, FLOOR)
-	if velocity.y !=0:
-		$Sprite.rotation_degrees = 90
 	if is_on_wall() || is_on_floor() || is_on_ceiling():
 		queue_free()
 

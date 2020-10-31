@@ -2,7 +2,7 @@ extends Node2D
 
 onready var global = get_node("/root/Global")
 onready var music = get_node("/root/Music")
-
+const LASER = preload("LaserOrange.tscn")
 
 export(String, FILE, "*.tscn") var left_stage
 export(String, FILE, "*.tscn") var right_stage
@@ -46,3 +46,26 @@ func _process(delta):
 
 func _on_Timer_timeout():
 	init_climb_down = false
+
+
+func shoot():
+	var sprite = $Path2D3/Follow/AnimatedSprite
+	var degrees = $Path2D3/Follow.rotation_degrees + 180
+	var laser = null
+	laser = LASER.instance()
+	add_child(laser)
+	print(degrees)
+	if  degrees <= 90:
+		laser.set_speed(Vector2(-400,0))
+	elif  degrees <= 185:
+		laser.set_speed(Vector2(0, -400))
+	elif degrees <= 275:
+		laser.set_speed(Vector2(400, 0))
+	elif degrees <= 365:
+		laser.set_speed(Vector2(0, 400))
+
+		
+	laser.global_position = sprite.get_node("Position2D").global_position
+	
+func _on_Shoot_timeout():
+	shoot()
