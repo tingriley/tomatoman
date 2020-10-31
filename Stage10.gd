@@ -21,7 +21,13 @@ func _ready():
 	set_modulate(Color(1,1,1,alpha))
 	$Player/Camera2D.limit_right = global.camera_limits_x[10] * global.SIZE_X
 	global.current_stage = 10
-	$Player.flip_player_to_left()
+	
+	if global.prev_stage == 11:
+		$Player.position.x = $Player/Camera2D.limit_right-32
+		$Player.position.y = 300
+		$Player.flip_player_to_left()
+		
+	
 	
 
 func change_stage():

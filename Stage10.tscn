@@ -10,6 +10,8 @@
 
 [node name="Stage10" type="Node2D"]
 script = ExtResource( 1 )
+left_stage = "res://Stage9.tscn"
+right_stage = "res://Stage11.tscn"
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 1, 0 )
