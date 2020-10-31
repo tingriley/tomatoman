@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var player_vars = get_node("/root/Global")
+const ENEMY = preload("BouncingGiant.tscn")
 
 const GRAVITY = 20
 const FLOOR = Vector2(0, -1)
@@ -27,7 +28,15 @@ func add_heart():
 	get_parent().add_child(heart)
 	heart.global_position = global_position + Vector2(0, 64)
 	
-	
+
+func add_enemy():
+	var enemy = null
+	enemy = ENEMY.instance()
+	enemy.velocity = Vector2(400*direction, 0)
+	get_parent().add_child(enemy)
+	enemy.position = global_position -Vector2(0, 50)
+	enemy.scale = Vector2(0.75, 0.75)
+
 func dead(damage):
 	hp -= damage 
 	$Label.visible = true
@@ -35,7 +44,7 @@ func dead(damage):
 	$TextTimer.start()
 	if hp <= 0:
 		is_dead = true
-		if rand_range(0, 1.0) >= 0.7:
+		if rand_range(0, 1.0) >= 0.2:
 			add_heart()
 		$AnimatedSprite.play("dead")
 		$CollisionShape2D.set_deferred("disabled", true) 
@@ -58,7 +67,9 @@ func _physics_process(delta):
 	
 		if Input.is_action_just_pressed("ui_focus_prev"):
 			if abs((get_parent().get_node("Player").position.x - position.x)) <= 400:
-				velocity.y = -700
+				velocity.y = -600
+				if rand_range(0, 1.0) >= 0.5:
+					add_enemy()
 		velocity.y += GRAVITY
 		
 		velocity = move_and_slide(velocity, FLOOR)
@@ -98,3 +109,8 @@ func _on_TextTimer_timeout():
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	queue_free()
+
+
+func _on_Fire_timeout():
+	pass
+	#add_enemy()

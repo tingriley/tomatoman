@@ -57,5 +57,10 @@ custom_colors/font_color = Color( 0.317647, 0.882353, 0.0901961, 0.831373 )
 
 [node name="TextTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Fire" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="TextTimer" to="." method="_on_TextTimer_timeout"]
+[connection signal="timeout" from="Fire" to="." method="_on_Fire_timeout"]
