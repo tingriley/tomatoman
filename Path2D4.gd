@@ -5,6 +5,6 @@ func _ready():
 	pass
 
 func _process(delta):
-	follow.offset = (follow.offset + 200*delta)
+	follow.offset = (follow.offset + 100*delta)
 
 

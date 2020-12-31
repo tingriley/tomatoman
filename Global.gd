@@ -49,7 +49,7 @@ func _ready():
 	camera_limits_x[8] = 1
 	camera_limits_x[9] = 4
 	camera_limits_x[10] = 4
-	camera_limits_x[11] = 4
+	camera_limits_x[11] = 6
 	camera_limits_x[12] = 1
 	camera_limits_x[13] = 10
 	

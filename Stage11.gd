@@ -21,7 +21,6 @@ func _ready():
 	set_modulate(Color(1,1,1,alpha))
 	$Player/Camera2D.limit_right = global.camera_limits_x[10] * global.SIZE_X
 	global.current_stage = 11
-	$Player.flip_player_to_left()
 	
 
 func change_stage():
@@ -48,24 +47,4 @@ func _on_Timer_timeout():
 	init_climb_down = false
 
 
-func shoot():
-	var sprite = $Path2D3/Follow/AnimatedSprite
-	var degrees = $Path2D3/Follow.rotation_degrees + 180
-	var laser = null
-	laser = LASER.instance()
-	add_child(laser)
-	print(degrees)
-	if  degrees <= 90:
-		laser.set_speed(Vector2(-400,0))
-	elif  degrees <= 185:
-		laser.set_speed(Vector2(0, -400))
-	elif degrees <= 275:
-		laser.set_speed(Vector2(400, 0))
-	elif degrees <= 365:
-		laser.set_speed(Vector2(0, 400))
 
-		
-	laser.global_position = sprite.get_node("Position2D").global_position
-	
-func _on_Shoot_timeout():
-	shoot()

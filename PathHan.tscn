@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://PathHan.gd" type="Script" id=1]
+[ext_resource path="res://Assets/han.png" type="Texture" id=2]
+[ext_resource path="res://Assets/han2.png" type="Texture" id=3]
+[ext_resource path="res://Label.tscn" type="PackedScene" id=11]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 25, 27.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 24.4711, 27.1731 )
+
+[node name="PathHan" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, 30 )
+
+[node name="Label" parent="." instance=ExtResource( 11 )]
+margin_left = -19.5283
+margin_top = -52.5724
+margin_right = 19.4717
+margin_bottom = -21.5724
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.0209808, -15.8392 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+animation = "idle"
+frame = 1
+playing = true
+offset = Vector2( -0.0209808, 15.8392 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -10.8071 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Shoot" type="Timer" parent="."]
+autostart = true
+
+[node name="TextTimer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -10.8071 )
+shape = SubResource( 3 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Shoot" to="." method="_on_Shoot_timeout"]
+[connection signal="timeout" from="TextTimer" to="." method="_on_TextTimer_timeout"]
